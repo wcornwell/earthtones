@@ -1,23 +1,44 @@
 earthtones
 ================
 
+Here is how to install the package:
+
+``` r
+if(!require(devtools)) install.packages("devtools")
+```
+
+    ## Loading required package: devtools
+
+``` r
+install_github("wcornwell/earthtones")
+```
+
+    ## Skipping install of 'earthtones' from a github remote, the SHA1 (f4ad141c) has not changed since last install.
+    ##   Use `force = TRUE` to force installation
+
+``` r
+library(earthtones)
+```
+
 Geographic color schemes
 ------------------------
 
 Let's say you wanted a color scheme based on a particular part of the world. For example the grand canyon.
 
 ``` r
-grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,longitude=-111.837962,zoom=12,number_of_colors=5)
+grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,
+                    longitude=-111.837962,zoom=12,number_of_colors=5)
 ```
 
-    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=36.094994,-111.837962&zoom=12&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
-
 ![](readme_files/figure-markdown_github/grand%20canyon-1.png)
+
+`number_of_colors` corresponds to how many colors you want back. The zoom value is passed to `ggmap`--essentially larger values zoom closer to the target lat+long.
 
 Or maybe you want a color scheme drawn from tropical reefs and lagoons.
 
 ``` r
-bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,longitude=-77.88,zoom=11,number_of_colors=5)
+bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,
+              longitude=-77.88,zoom=11,number_of_colors=5)
 ```
 
     ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=24.2,-77.88&zoom=11&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
@@ -30,41 +51,46 @@ Just pick your favorite place in the world, and find out the major colors
  uluru<-plot_satellite_image_and_pallette(latitude = -25.5,longitude = 131,zoom=10,number_of_colors=5)
 ```
 
-    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=-25.5,131&zoom=10&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
-
 ![](readme_files/figure-markdown_github/uluru-1.png)
 
 The function `plot_satellite_image_and_pallette` is good for seeing both the image and the color palette. To actually use the color, it's much easier to use `get_earthtones`. For example:
 
 ``` r
+if(!require(ggplot2)) install.packages("ggplot2")
 library(ggplot2)
 bahamas_colors<-get_earthtones(latitude = 24.2,longitude=-77.88,
 zoom=11,number_of_colors=3)
+ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
+  geom_point(size = 2.5)+
+  scale_color_manual(values = bahamas_colors)+
+  theme_bw()
 ```
 
-    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=24.2,-77.88&zoom=11&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
+![](readme_files/figure-markdown_github/bahama%20iris-1.png)
+
+And now Fisher's irises are colored in a Bahama style. Actually the irises were collected by a botanist named Edgar Anderson from the Gaspé Peninsula in Quebec, so it might be better to use a color scheme from there:
 
 ``` r
-ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+geom_point(size = 2)+
-  scale_color_manual(values = bahamas_colors)+theme_bw()
+plot_satellite_image_and_pallette(latitude = 48.7709,
+                                  longitude=-64.660939,zoom=9,number_of_colors = 3)
 ```
 
-![](readme_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](readme_files/figure-markdown_github/gaspe-1.png)
 
-or
+    ## [1] "#4B6098" "#2A4530" "#182A37"
+    ## attr(,"class")
+    ## [1] "palette"
 
 ``` r
-grand_canyon<-get_earthtones(latitude = 36.094994,longitude=-111.837962,zoom=12,number_of_colors=3)
+gaspe<-get_earthtones(latitude = 48.7709,
+                                  longitude=-64.660939,zoom=9,number_of_colors = 3)
+ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
+  geom_point(size = 2)+
+  scale_color_manual(values = gaspe)+
+  theme_bw()
 ```
 
-    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=36.094994,-111.837962&zoom=12&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
-
-``` r
-ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+geom_point(size = 2)+
-  scale_color_manual(values = grand_canyon)+theme_bw()
-```
-
-![](readme_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](readme_files/figure-markdown_github/gaspe-2.png)
 
 Methods details
 ---------------
