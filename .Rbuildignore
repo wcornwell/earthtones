@@ -1,0 +1,11 @@
+^\.travis\.yml$
+^.*\.Rproj$
+^\.Rproj\.user$
+^createlookup\.R$
+^plantListAcceptedNames$
+^remake\.yml$
+^remake_sources\.yml$
+^source_data$
+^Makefile$
+^plant_lookup\.csv$
+^\.remake$
