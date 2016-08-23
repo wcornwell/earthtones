@@ -5,7 +5,7 @@ Here is how to install the package:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
-install_github("wcornwell/earthtones")
+devtools::install_github("wcornwell/earthtones")
 library(earthtones)
 ```
 
@@ -30,8 +30,6 @@ bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,
                                            longitude=-77.88,zoom=11,number_of_colors=5)
 ```
 
-    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=24.2,-77.88&zoom=11&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
-
 ![](readme_files/figure-markdown_github/bahamas-1.png)
 
 Just pick your favorite place in the world, and find out the major colors
@@ -55,9 +53,9 @@ ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
   theme_bw()
 ```
 
-![](readme_files/figure-markdown_github/bahama%20iris-1.png)
+![](readme_files/figure-markdown_github/bahama_iris-1.png)
 
-And now Fisher's irises are colored in a Bahama style. Actually the irises were collected by a botanist named Edgar Anderson from the Gaspé Peninsula in Quebec, so it might be better to use a color scheme from there:
+And now Fisher's irises are colored in a Bahama style. However, actually the iris data was collected by a botanist named Edgar Anderson from the Gaspé Peninsula in Quebec, so it might be better to use a color scheme from there:
 
 ``` r
 plot_satellite_image_and_pallette(latitude = 48.7709,
@@ -66,7 +64,7 @@ plot_satellite_image_and_pallette(latitude = 48.7709,
 
 ![](readme_files/figure-markdown_github/gaspe-1.png)
 
-    ## [1] "#223C2C" "#425942" "#4A5F97"
+    ## [1] "#1B3329" "#304A34" "#4B6097"
     ## attr(,"class")
     ## [1] "palette"
 

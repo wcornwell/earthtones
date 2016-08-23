@@ -7,7 +7,7 @@ Here is how to install the package:
 
 ```{r setup, include=TRUE,message=FALSE,warning=FALSE}
 if(!require(devtools)) install.packages("devtools")
-install_github("wcornwell/earthtones")
+devtools::install_github("wcornwell/earthtones")
 library(earthtones)
 ```
 
@@ -24,7 +24,7 @@ grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,
 
 Or maybe you want a color scheme drawn from tropical reefs and lagoons.  
 
-```{r bahamas}
+```{r bahamas,message=FALSE}
 bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,
                                            longitude=-77.88,zoom=11,number_of_colors=5)
 ```
@@ -37,7 +37,7 @@ uluru<-plot_satellite_image_and_pallette(latitude = -25.5,longitude = 131,zoom=1
 
 The function `plot_satellite_image_and_pallette` is good for seeing both the image and the color palette.  To actually use the color, it's much easier to use `get_earthtones`.  For example:
 
-```{r bahama iris,message=FALSE}
+```{r bahama_iris,message=FALSE}
 if(!require(ggplot2)) install.packages("ggplot2")
 library(ggplot2)
 bahamas_colors <- get_earthtones(latitude = 24.2,
@@ -48,7 +48,7 @@ ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
   theme_bw()
 ```
 
-And now Fisher's irises are colored in a Bahama style.  Actually the irises were collected by a botanist named  Edgar Anderson from the Gaspé Peninsula in Quebec, so it might be better to use a color scheme from there:
+And now Fisher's irises are colored in a Bahama style.  However, actually the iris data was collected by a botanist named Edgar Anderson from the Gaspé Peninsula in Quebec, so it might be better to use a color scheme from there:
 
 ```{R gaspe,message=FALSE}
 plot_satellite_image_and_pallette(latitude = 48.7709,
