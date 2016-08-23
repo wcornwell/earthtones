@@ -5,18 +5,7 @@ Here is how to install the package:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
-```
-
-    ## Loading required package: devtools
-
-``` r
 install_github("wcornwell/earthtones")
-```
-
-    ## Skipping install of 'earthtones' from a github remote, the SHA1 (f4ad141c) has not changed since last install.
-    ##   Use `force = TRUE` to force installation
-
-``` r
 library(earthtones)
 ```
 
@@ -27,7 +16,7 @@ Let's say you wanted a color scheme based on a particular part of the world. For
 
 ``` r
 grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,
-                    longitude=-111.837962,zoom=12,number_of_colors=5)
+                                                longitude=-111.837962,zoom=12,number_of_colors=5)
 ```
 
 ![](readme_files/figure-markdown_github/grand%20canyon-1.png)
@@ -38,7 +27,7 @@ Or maybe you want a color scheme drawn from tropical reefs and lagoons.
 
 ``` r
 bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,
-              longitude=-77.88,zoom=11,number_of_colors=5)
+                                           longitude=-77.88,zoom=11,number_of_colors=5)
 ```
 
     ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=24.2,-77.88&zoom=11&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
@@ -48,7 +37,7 @@ bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,
 Just pick your favorite place in the world, and find out the major colors
 
 ``` r
- uluru<-plot_satellite_image_and_pallette(latitude = -25.5,longitude = 131,zoom=10,number_of_colors=5)
+uluru<-plot_satellite_image_and_pallette(latitude = -25.5,longitude = 131,zoom=10,number_of_colors=5)
 ```
 
 ![](readme_files/figure-markdown_github/uluru-1.png)
@@ -58,8 +47,8 @@ The function `plot_satellite_image_and_pallette` is good for seeing both the ima
 ``` r
 if(!require(ggplot2)) install.packages("ggplot2")
 library(ggplot2)
-bahamas_colors<-get_earthtones(latitude = 24.2,longitude=-77.88,
-zoom=11,number_of_colors=3)
+bahamas_colors <- get_earthtones(latitude = 24.2,
+      longitude=-77.88, zoom=11,number_of_colors=3)
 ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
   geom_point(size = 2.5)+
   scale_color_manual(values = bahamas_colors)+
@@ -72,18 +61,18 @@ And now Fisher's irises are colored in a Bahama style. Actually the irises were 
 
 ``` r
 plot_satellite_image_and_pallette(latitude = 48.7709,
-                                  longitude=-64.660939,zoom=9,number_of_colors = 3)
+  longitude=-64.660939,zoom=9,number_of_colors = 3)
 ```
 
 ![](readme_files/figure-markdown_github/gaspe-1.png)
 
-    ## [1] "#4B6098" "#2A4530" "#182A37"
+    ## [1] "#223C2C" "#425942" "#4A5F97"
     ## attr(,"class")
     ## [1] "palette"
 
 ``` r
 gaspe<-get_earthtones(latitude = 48.7709,
-                                  longitude=-64.660939,zoom=9,number_of_colors = 3)
+  longitude=-64.660939,zoom=9,number_of_colors = 3)
 ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
   geom_point(size = 2)+
   scale_color_manual(values = gaspe)+
