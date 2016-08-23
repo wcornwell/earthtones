@@ -104,7 +104,7 @@ plot.palette <- function(x, ...) {
 ##' longitude=-111.837962,zoom=12,number_of_colors=6)
 ##' 
 
-plot_satellite_image_and_pallette <- function(latitude = 24.2,longitude=-77.88,zoom=11,number_of_colors=5) {
+plot_satellite_image_and_pallette <- function(latitude = 24.2,longitude=-77.88,zoom=11,number_of_colors=2) {
   map<-ggmap::get_map(location = c(longitude,latitude),maptype ="satellite",zoom=zoom)
   x<-get_colors_from_map(map,number_of_colors=number_of_colors)
   par(mfrow=c(2,1),mar = c(0.5, 0.5, 0.5, 0.5))

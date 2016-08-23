@@ -1,0 +1,56 @@
+---
+title: "earthtones"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+if(!require(devtools)) install.packages("devtools")
+install_github("wcornwell/earthtones")
+library(earthtones)
+```
+
+## Geographic color schemes
+
+Let's say you wanted a color scheme based on a particular part of the world.  For example the grand canyon.  
+
+```{r grand canyon}
+grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,longitude=-111.837962,zoom=12,number_of_colors=5)
+```
+
+Or maybe you want a color scheme drawn from tropical reefs and lagoons.  
+
+```{r bahamas}
+bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,longitude=-77.88,zoom=11,number_of_colors=5)
+```
+
+Just pick your favorite place in the world, and find out the major colors
+
+```{r uluru}
+ uluru<-plot_satellite_image_and_pallette(latitude = -25.5,longitude = 131,zoom=10,number_of_colors=5)
+```
+
+The function `plot_satellite_image_and_pallette` is good for seeing both the image and the color palette.  To actually use the color, it's much easier to use `get_earthtones`.  For example:
+
+```{r }
+library(ggplot2)
+bahamas_colors<-get_earthtones(latitude = 24.2,longitude=-77.88,
+zoom=11,number_of_colors=3)
+ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+geom_point(size = 2)+
+  scale_color_manual(values = bahamas_colors)+theme_bw()
+```
+
+or
+
+```{r}
+grand_canyon<-get_earthtones(latitude = 36.094994,longitude=-111.837962,zoom=12,number_of_colors=3)
+ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+geom_point(size = 2)+
+  scale_color_manual(values = grand_canyon)+theme_bw()
+```
+
+##Methods details
+
+1. This library gets an image from Google earth which come from different sources depending on the zoom and the particular place.  
+
+2. It then extracts the colors in the image, translates them into a perceptually uniform color space and then runs k-means clustering algorithm to find the major colors for an area
+
+3. These are then converted back into a R style color pallete.  

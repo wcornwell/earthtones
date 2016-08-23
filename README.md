@@ -1,131 +1,76 @@
-# taxonlookup: a taxonomic lookup table for land plants
+earthtones
+================
 
-[![Build Status](https://travis-ci.org/traitecoevo/taxonlookup.png?branch=master)](https://travis-ci.org/traitecoevo/taxonlookup)
-[![codecov.io](https://codecov.io/github/traitecoevo/taxonlookup/coverage.svg?branch=master)](https://codecov.io/github/traitecoevo/taxonlookup?branch=master)
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.33930.svg)](http://dx.doi.org/10.5281/zenodo.33930)
+Geographic color schemes
+------------------------
 
-## How to use this package
+Let's say you wanted a color scheme based on a particular part of the world. For example the grand canyon.
 
-### Install the required packages
-
-```r
-install.packages("devtools")
-devtools::install_github("hadley/httr")
-devtools::install_github(c("richfitz/storr@refactor", "richfitz/datastorr"))
-devtools::install_github("wcornwell/taxonlookup")
-library(taxonlookup)
+``` r
+grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,longitude=-111.837962,zoom=12,number_of_colors=5)
 ```
 
-### Find the higher taxonomy for your species list
+    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=36.094994,-111.837962&zoom=12&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
 
-```r
-lookup_table(c("Pinus ponderosa","Quercus agrifolia"),by_species=TRUE)
+![](readme_files/figure-markdown_github/grand%20canyon-1.png)
+
+Or maybe you want a color scheme drawn from tropical reefs and lagoons.
+
+``` r
+bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,longitude=-77.88,zoom=11,number_of_colors=5)
 ```
 
-|   | Genus        | Family           | Order  | Group|
-| ------------- | ----------- | ----------- | ----------- | ----------- |
-| Pinus ponderosa |    Pinus | Pinaceae | Pinales | Gymnosperms|
-| Quercus agrifolia | Quercus | Fagaceae | Fagales | Angiosperms|
+    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=24.2,-77.88&zoom=11&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
 
-There are a few other functions to get species diversity numbers and other (non-Linnean) high clades if you want that information.  **If you use this package in a published paper, please note the version number**.  This  will allow others to reproduce your work later.  
+![](readme_files/figure-markdown_github/bahamas-1.png)
 
-That's it, really.  Below is information about the data sources and the versioned data distribution system (which we think is really cool), feel free to check it out, but you don't need to read the rest of this to use the package.  
+Just pick your favorite place in the world, and find out the major colors
 
-----------------------
-
-## Data sources
-
-1. [The Plant List](http://www.theplantlist.org/) for accepted genera to families
-
-2. [APWeb](http://www.mobot.org/MOBOT/research/APweb/) for family-level synonymies and family to order as curated by [Peter Stevens](http://www.umsl.edu/~biology/About%20the%20Department/Faculty/stevens.html)
-
-3. [A higher-level taxonomy lookup](http://datadryad.org/resource/doi:10.5061/dryad.63q27.2/1.1) compiled by [Dave Tank](http://phylodiversity.net/dtank/Tank_Lab/Tank_Lab.html) and colleagues
-
-We have a complete genus-family-order mapping for vascular plants. For bryophytes, there is only genus-family mapping at present; if anyone has a family-order map for bryophytes, please let me know. We also correct some spelling errors, special character issues, and other errors from The Plant List.  We will try to keep this curation up-to-date, but there may new errors introduced as the cannonical data sources shift to future versions.  
-
-## Notes on genus-to-family mapping
-
-`Taxonlookup` is constrained to a one-to-one genus-to-family (Linnean) mapping of taxa.  The Plant List v1.1 is not strict about following this rule and so this creates a few conflicts, which hopefully these will be resolved in v1.2.  In the `taxonlookup` we resolve these conflicts with the following rules:
-
-1. For conflicts among accepted species the genus is mapped to the family with more accepted species. This seemed to solve a somewhat common TPL bug where there was one moss species with the genus mistakenly listed as Pinus or something like that, and we didn't wanted a behavior that drops the clearly legitimate mapping of Pinus to Pinaceae.
-
-2. For conflicts in which some species are accepted and others unresolved, the genus is mapped to the family of the accepted species.
-
-3. For conflicts where all the species are unresolved it drops the genus entirely from both (or in some cases all three) families
-
-The full list of TPL genus--family pairs that get dropped based on these criteria is [here](https://github.com/traitecoevo/taxonlookup/blob/master/source_data/badGeneraFamilyPairs.csv).
-
-## Details about the data distribution system
-
-This is designed to be a living database--it will update as taxonomy changes (which it always will). These updates will correspond with changes to the version number of this resource, and each version of the database will be available via [travis-ci](http://travis-ci.org) and [Github Releases](http://docs.travis-ci.com/user/deployment/releases/). If you use this resource for published analysis, please note the version number in your publication.  This will allow anyone in the future to go back and find **exactly** the same version of the data that you used.
- 
-The core of this repository is a set of scripts that dynamically build a genus-family-order-higher taxa look-up table for land plants with the data lookup primarily coming from three sources (with most of the web-scraping done by [taxize](https://github.com/ropensci/taxize)): 
-
-The scripts are in the repository but not in the package.  Only the data and ways to access the data are in the package; the reason for this design will become clear further down the readme.  
-
-You can download and load the data into `R` using the `plant_lookup()` function:
-
-```r
-head(plant_lookup())
+``` r
+ uluru<-plot_satellite_image_and_pallette(latitude = -25.5,longitude = 131,zoom=10,number_of_colors=5)
 ```
 
-The first call to `plant_lookup` will download the data, but subsequent calls will be essentially instantaneous.  If you are interested in diversity data, the data object also stores the number of accepted species within each genus as per the plant list:
+    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=-25.5,131&zoom=10&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
 
-```r
-head(plant_lookup(include_counts = TRUE))
+![](readme_files/figure-markdown_github/uluru-1.png)
+
+The function `plot_satellite_image_and_pallette` is good for seeing both the image and the color palette. To actually use the color, it's much easier to use `get_earthtones`. For example:
+
+``` r
+library(ggplot2)
+bahamas_colors<-get_earthtones(latitude = 24.2,longitude=-77.88,
+zoom=11,number_of_colors=3)
 ```
 
-For taxonomic groups higher than order, use the `add_higher_order()` function.  Because currently the higher taxonomy of plants does not have a nested structure, the format of that lookup table is a little more complicated.  Check the help file for more details.  To get the version number of the dataset run:
+    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=24.2,-77.88&zoom=11&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
 
-```r
-plant_lookup_version_current()
+``` r
+ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+geom_point(size = 2)+
+  scale_color_manual(values = bahamas_colors)+theme_bw()
 ```
 
-For most uses, the latest release should be sufficient, and this is all that is necessary to use the data.  
-However, if there have been some recent changes to taxonomy  that are both important for your project and incorporated in the cannical sources (the plant list or APWeb) but are more recent than the last release of this package, you might want to rebuild the lookup table from the sources. Because this requires downloading the data from the web sources, this will run  slowly, depending on your internet connection.  
+![](readme_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
-# Rebuilding the lookup table
+or
 
-To build the lookup table, first clone this repository.  Then download and install `remake` from github:    
-
-```r
-	devtools::install_github("richfitz/remake")
+``` r
+grand_canyon<-get_earthtones(latitude = 36.094994,longitude=-111.837962,zoom=12,number_of_colors=3)
 ```
 
-Then run the following commands from within R.  Make sure the home directory is within the repository:
+    ## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=36.094994,-111.837962&zoom=12&size=640x640&scale=2&maptype=satellite&language=en-EN&sensor=false
 
-```r
-  remake::install_missing_packages()
-	remake::make()
-```	
-
-This requires a working internet connection and that the plant list, mobot, and datadryad servers are up and working properly.  This will dynamically re-create the lookup tables within your local version of the package, as well as save the main file as a `.csv` in your home directory.
-
-# Living database
-
-## Stable version
-
-Eventually this package will exist on CRAN; versions there will be our "stable releases" and will generally correspond to an increase in the first version number.
-
-## Development version
-
-We will periodically release development versions of the database using github releases (every CRAN release will also be a github release).  We'll do this automatically using [travis-ci](http://travis-ci.org) using its [deploy to github releases](http://docs.travis-ci.com/user/deployment/releases/) and [conditional deployment](http://docs.travis-ci.com/user/deployment/#Conditional-Releases-with-on%3A) features.  This will correspond to an increase in the second version number and also to the first version number when simultaneously being released to CRAN.
-
-## Bleeding edge version
-
-Download the package and rerun the build script.  We'll work this way as we add new data to the package.
-
-# Notes for making a release using this *living dataset* design
-
-* Update the `DESCRIPTION` file to **increase** the version number.  Now that we are past version 1.0.0, we will use [semantic versioning](http://semver.org/) so be aware of when to change what number.
-* Run `remake::make()` to rebuild `plant_lookup.csv`
-* Commit code changes and `DESCRIPTION` and push to GitHub
-* With R in the package directory, run
-
-```r
-taxonlookup:::plant_lookup_release("<description>")
+``` r
+ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+geom_point(size = 2)+
+  scale_color_manual(values = grand_canyon)+theme_bw()
 ```
 
-where `"<description>"` is a brief description of new features of the release.
-* Check that it works by running `taxonlookup::plant_lookup(taxonlookup::plant_lookup_version_current(FALSE))` which should pull the data.
-* Update the Zenodo badge on the readme
+![](readme_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+Methods details
+---------------
+
+1.  This library gets an image from Google earth which come from different sources depending on the zoom and the particular place.
+
+2.  It then extracts the colors in the image, translates them into a perceptually uniform color space and then runs k-means clustering algorithm to find the major colors for an area
+
+3.  These are then converted back into a R style color pallete.
