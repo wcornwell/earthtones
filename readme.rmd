@@ -2,13 +2,14 @@
 title: "earthtones"
 output: github_document
 ---
+[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones)
 
 Here is how to install the package:
 
 ```{r setup, include=TRUE,message=FALSE,warning=FALSE}
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("wcornwell/earthtones")
-library(earthtones)
+library("earthtones")
 ```
 
 ## Geographic color schemes
@@ -16,8 +17,8 @@ library(earthtones)
 Let's say you wanted a color scheme based on a particular part of the world.  For example the grand canyon.  
 
 ```{r grand canyon,message=FALSE}
-grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,
-                                                longitude=-111.837962,zoom=12,number_of_colors=5)
+grand_canyon <- plot_satellite_image_and_pallette(latitude = 36.094994,
+                                                longitude=-111.837962, zoom=12, number_of_colors=5)
 ```
 
 `number_of_colors` corresponds to how many colors you want back.  The zoom value is passed to `ggmap`--essentially larger values zoom closer to the target lat+long.  
@@ -25,37 +26,39 @@ grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,
 Or maybe you want a color scheme drawn from tropical reefs and lagoons.  
 
 ```{r bahamas,message=FALSE}
-bahamas<-plot_satellite_image_and_pallette(latitude = 24.2,
-                                           longitude=-77.88,zoom=11,number_of_colors=5)
+bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
+                                           longitude=-77.88, zoom=11, number_of_colors=5)
 ```
 
 Just pick your favorite place in the world, and find out the major colors
 
 ```{r uluru,message=FALSE}
-uluru<-plot_satellite_image_and_pallette(latitude = -25.5,longitude = 131,zoom=10,number_of_colors=5)
+uluru<-plot_satellite_image_and_pallette(latitude = -25.5, 
+                                         longitude = 131, zoom=10, number_of_colors=5)
 ```
 
 The function `plot_satellite_image_and_pallette` is good for seeing both the image and the color palette.  To actually use the color, it's much easier to use `get_earthtones`.  For example:
 
 ```{r bahama_iris,message=FALSE}
 if(!require(ggplot2)) install.packages("ggplot2")
-library(ggplot2)
 bahamas_colors <- get_earthtones(latitude = 24.2,
-      longitude=-77.88, zoom=11,number_of_colors=3)
-ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
+      longitude=-77.88, zoom=11, number_of_colors=3)
+ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
   geom_point(size = 2.5)+
   scale_color_manual(values = bahamas_colors)+
   theme_bw()
 ```
 
-And now Fisher's irises are colored in a Bahama style.  However, actually the iris data was collected by a botanist named Edgar Anderson from the Gaspé Peninsula in Quebec, so it might be better to use a color scheme from there:
+And now Fisher's irises are colored in a Bahama style.  However, actually data from two of the three iris speces was collected by a botanist named Edgar Anderson from the [Gaspé Peninsula in Quebec](https://www.jstor.org/stable/2394164?seq=1#page_scan_tab_contents), so it might be better to use a color scheme from there for those two species.  
 
 ```{R gaspe,message=FALSE}
+iris.from.gaspe <- dplyr::filter(iris, Species!="virginica")
+
 plot_satellite_image_and_pallette(latitude = 48.7709,
-  longitude=-64.660939,zoom=9,number_of_colors = 3)
-gaspe<-get_earthtones(latitude = 48.7709,
-  longitude=-64.660939,zoom=9,number_of_colors = 3)
-ggplot(iris,aes(x=Petal.Length,y=Petal.Width,col=Species))+
+  longitude=-64.660939,zoom=9,number_of_colors = 2)
+gaspe <- get_earthtones(latitude = 48.7709,
+  longitude=-64.660939 ,zoom=9, number_of_colors = 2)
+ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
   geom_point(size = 2)+
   scale_color_manual(values = gaspe)+
   theme_bw()
