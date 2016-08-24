@@ -9,3 +9,8 @@
 ^Makefile$
 ^plant_lookup\.csv$
 ^\.remake$
+^readme.rmd$
+^readme.md$
+^readme.html$
+^readme_files$
+^earthtones.Rproj$
