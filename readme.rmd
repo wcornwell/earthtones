@@ -77,7 +77,7 @@ and here is the pam one
 
 ```{r bahamas_pam,message=FALSE}
 bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
-                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam")
+                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam",sampleRate = 350)
 ```
 
 The sand-color is perhaps a bit sandier.  
