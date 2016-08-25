@@ -68,7 +68,7 @@ plot_satellite_image_and_pallette(latitude = 48.7709,
 
 ![](readme_files/figure-markdown_github/gaspe-1.png)
 
-    ## [1] "#294330" "#4B6097"
+    ## [1] "#4A5F97" "#294330"
     ## attr(,"class")
     ## [1] "palette"
 
@@ -83,11 +83,33 @@ ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
 
 ![](readme_files/figure-markdown_github/gaspe-2.png)
 
+There are lots of ways to do the clustering of the colors. The default is the k-means algorithm but there is also the pam one, which is a bit more sophisticated (and computationally intensive).
+
+Here is the k-means result:
+
+``` r
+bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
+                                           longitude=-77.88, zoom=11, number_of_colors=5,method="kmeans")
+```
+
+![](readme_files/figure-markdown_github/bahamas_kmeans-1.png)
+
+and here is the pam one
+
+``` r
+bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
+                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam")
+```
+
+![](readme_files/figure-markdown_github/bahamas_pam-1.png)
+
+The sand-color is perhaps a bit sandier.
+
 Methods details
 ---------------
 
 1.  This library gets an image from Google earth which come from different sources depending on the zoom and the particular place.
 
-2.  It then extracts the colors in the image, translates them into a perceptually uniform color space and then runs k-means clustering algorithm to find the major colors for an area
+2.  It then extracts the colors in the image, translates them into a perceptually uniform color space and then runs one of a few different clustering algorithms to find the major colors for an area
 
 3.  These are then converted back into a R style color pallete.

@@ -64,10 +64,28 @@ ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
   theme_bw()
 ```
 
+There are lots of ways to do the clustering of the colors.  The default is the k-means algorithm but there is also the pam one, which is a bit more sophisticated (and computationally intensive).
+
+Here is the k-means result:
+
+```{r bahamas_kmeans,message=FALSE}
+bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
+                                           longitude=-77.88, zoom=11, number_of_colors=5,method="kmeans")
+```
+
+and here is the pam one
+
+```{r bahamas_pam,message=FALSE}
+bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
+                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam")
+```
+
+The sand-color is perhaps a bit sandier.  
+
 ##Methods details
 
 1. This library gets an image from Google earth which come from different sources depending on the zoom and the particular place.  
 
-2. It then extracts the colors in the image, translates them into a perceptually uniform color space and then runs k-means clustering algorithm to find the major colors for an area
+2. It then extracts the colors in the image, translates them into a perceptually uniform color space and then runs one of a few different clustering algorithms to find the major colors for an area
 
 3. These are then converted back into a R style color pallete.  
