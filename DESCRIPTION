@@ -12,5 +12,6 @@ Maintainer: Will Cornwell <wcornwell@gmail.com>
 Imports:
   ggmap (>= 2.6.1)
 Suggests: 
-  testthat
+  testthat,
+  cluster
 RoxygenNote: 5.0.1
