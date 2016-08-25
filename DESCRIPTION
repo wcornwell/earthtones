@@ -10,8 +10,8 @@ LazyData: true
 Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]"))
 Maintainer: Will Cornwell <wcornwell@gmail.com>
 Imports:
-  ggmap (>= 2.6.1),
-  cluster
+  ggmap (>= 2.6.1)
 Suggests: 
-  testthat
+  testthat,
+  cluster
 RoxygenNote: 5.0.1

@@ -5,7 +5,7 @@
 \title{earthtones}
 \usage{
 get_earthtones(latitude = 50.759, longitude = -125.673, zoom = 11,
-  number_of_colors = 3, method = "kmeans", sampleRate = 50)
+  number_of_colors = 3, method = "kmeans", sampleRate = 500)
 }
 \arguments{
 \item{latitude}{}
@@ -29,7 +29,9 @@ Getting a color scheme from a place on earth
 uluru<-get_earthtones(latitude = -25.5,
 longitude = 131,zoom=12,number_of_colors=5)
 print(uluru)
+plot(uluru)
 
+\dontrun{
 world<-get_earthtones(latitude = 0,longitude = 0,
 zoom=2,number_of_colors=8)
 plot(world)
@@ -41,15 +43,17 @@ plot(british_columbia_glacier)
 joshua_tree<-get_earthtones(latitude = 33.9, 
  longitude = -115.9,zoom=9,number_of_colors=5)
 plot(joshua_tree)
-
+ 
+## Compare clustering methods
 par(mfrow=c(2,1))
 bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
-zoom=11,number_of_colors=5)
+zoom=11,number_of_colors=5,sampleRate=500)
 plot(bahamas)
 
 bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
 zoom=11,number_of_colors=5,method='pam',sampleRate=500)
 plot(bahamas)
+}
 
 
 
