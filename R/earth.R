@@ -24,7 +24,9 @@
 ##' uluru<-get_earthtones(latitude = -25.5,
 ##' longitude = 131,zoom=12,number_of_colors=5)
 ##' print(uluru)
+##' plot(uluru)
 ##' 
+##' \dontrun{
 ##' world<-get_earthtones(latitude = 0,longitude = 0,
 ##' zoom=2,number_of_colors=8)
 ##' plot(world)
@@ -36,15 +38,17 @@
 ##' joshua_tree<-get_earthtones(latitude = 33.9, 
 ##'  longitude = -115.9,zoom=9,number_of_colors=5)
 ##' plot(joshua_tree)
-##' 
+##'  
+##' ## Compare clustering methods
 ##' par(mfrow=c(2,1))
 ##' bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
-##' zoom=11,number_of_colors=5)
+##' zoom=11,number_of_colors=5,sampleRate=500)
 ##' plot(bahamas)
 ##' 
 ##' bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
 ##' zoom=11,number_of_colors=5,method='pam',sampleRate=500)
 ##' plot(bahamas)
+##' }
 ##' 
 ##' 
 ##' 
@@ -103,7 +107,7 @@ plot.palette <- function(x, ...) {
 ##' uluru<-plot_satellite_image_and_pallette(latitude = -25.5,
 ##' longitude = 131,zoom=10)
 ##' 
-##' 
+##' \dontrun{
 ##' world<-plot_satellite_image_and_pallette(latitude = 0,longitude = 0,
 ##' zoom=2,number_of_colors=4)
 ##' 
@@ -122,6 +126,8 @@ plot.palette <- function(x, ...) {
 ##' 
 ##' grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,
 ##' longitude=-111.837962,zoom=12,number_of_colors=6)
+##' }
+##' 
 ##' 
 
 plot_satellite_image_and_pallette <- function(latitude = 24.2,longitude=-77.88,zoom=11,
@@ -136,7 +142,7 @@ plot_satellite_image_and_pallette <- function(latitude = 24.2,longitude=-77.88,z
 
 
 
-get_colors_from_map<-function(map,number_of_colors,clust.method=method,subsampleRate=sampleRate){
+get_colors_from_map<-function(map,number_of_colors,clust.method,subsampleRate){
   if (subsampleRate < 300 & clust.method=="pam") {
     message("Pam can be slow, consider a larger sampleRate?")
   }
@@ -151,7 +157,7 @@ get_colors_from_map<-function(map,number_of_colors,clust.method=method,subsample
   }
   if (clust.method=="pam"){
     if (!requireNamespace("cluster",quietly=TRUE)) {
-      stop("The 'cluster' package is needed for method='pam'. Please install it.",
+      stop("The 'cluster' package is needed for cluster.method='pam'. Please install it.",
            call. = FALSE)
     }
     out<-cluster::pam(x=lab.restructure,k=number_of_colors,diss=FALSE)
@@ -159,6 +165,3 @@ get_colors_from_map<-function(map,number_of_colors,clust.method=method,subsample
   }
   return(rgb(out.rgb))
 }
-
-
-  

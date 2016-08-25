@@ -5,8 +5,7 @@
 \title{plot_satellite_image_and_pallette}
 \usage{
 plot_satellite_image_and_pallette(latitude = 24.2, longitude = -77.88,
-  zoom = 11, number_of_colors = 2, method = "kmeans",
-  sampleRate = sampleRate)
+  zoom = 11, number_of_colors = 2, method = "kmeans", sampleRate = 50)
 }
 \arguments{
 \item{latitude}{}
@@ -31,7 +30,7 @@ as a side product, it plots a map of the satellite image along with the color pa
 uluru<-plot_satellite_image_and_pallette(latitude = -25.5,
 longitude = 131,zoom=10)
 
-
+\dontrun{
 world<-plot_satellite_image_and_pallette(latitude = 0,longitude = 0,
 zoom=2,number_of_colors=4)
 
@@ -50,6 +49,8 @@ longitude=-60.49666,zoom=10,number_of_colors=3)
 
 grand_canyon<-plot_satellite_image_and_pallette(latitude = 36.094994,
 longitude=-111.837962,zoom=12,number_of_colors=6)
+}
+
 
 }
 
