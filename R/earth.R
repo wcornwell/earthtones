@@ -11,6 +11,10 @@
 ##' @param zoom
 ##'
 ##' @param number_of_colors
+##' 
+##' @param method specifies clustering method. Options are \code{kmeans} or \code{pam} (partitioning around medoids)
+##' 
+##' @param sampleRate subsampling factor - bigger number = more subsampling 
 ##'
 ##' @import grDevices stats graphics
 ##' @export
@@ -29,21 +33,33 @@
 ##'  ,longitude = -125.673,zoom=10,number_of_colors=5)
 ##' plot(british_columbia_glacier)
 ##' 
-##'  joshua_tree<-get_earthtones(latitude = 33.9, 
+##' joshua_tree<-get_earthtones(latitude = 33.9, 
 ##'  longitude = -115.9,zoom=9,number_of_colors=5)
 ##' plot(joshua_tree)
 ##' 
+##' par(mfrow=c(2,1))
 ##' bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
 ##' zoom=11,number_of_colors=5)
+##' plot(bahamas)
+##' 
+##' bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
+##' zoom=11,number_of_colors=5,method='pam',sampleRate=500)
 ##' plot(bahamas)
 ##' 
 ##' 
 ##' 
 
 get_earthtones <- function(latitude=50.759, longitude=-125.673,
-                           zoom=11,number_of_colors=3) {
+                           zoom=11,number_of_colors=3,method="kmeans",sampleRate=50) {
+  # test specified method is supported
+  supported_methods<-c("kmeans","pam")
+  if (!method %in% supported_methods) {
+    stop(paste0("method specified is not valid (typo?) or not yet supported, please choose from: ",
+                paste(supported_methods, collapse = ", ")))
+  }
+  
   map<-ggmap::get_map(location = c(longitude,latitude),maptype ="satellite",zoom=zoom)
-  out.col<-get_colors_from_map(map,number_of_colors)
+  out.col<-get_colors_from_map(map,number_of_colors,method=method,sampleRate=sampleRate)
   return(structure(out.col, class = "palette"))
 }
   
@@ -75,6 +91,10 @@ plot.palette <- function(x, ...) {
 ##' @param zoom
 ##'
 ##' @param number_of_colors
+##' 
+##' @param method specifies clustering method. Options are \code{kmeans} or \code{pam} (partitioning around medoids)
+##' 
+##' @param sampleRate subsampling factor - bigger number = more subsampling 
 ##'
 ##' @export
 ##' @examples
@@ -104,9 +124,10 @@ plot.palette <- function(x, ...) {
 ##' longitude=-111.837962,zoom=12,number_of_colors=6)
 ##' 
 
-plot_satellite_image_and_pallette <- function(latitude = 24.2,longitude=-77.88,zoom=11,number_of_colors=2) {
+plot_satellite_image_and_pallette <- function(latitude = 24.2,longitude=-77.88,zoom=11,
+                                              number_of_colors=2,method="kmeans",sampleRate=sampleRate) {
   map<-ggmap::get_map(location = c(longitude,latitude),maptype ="satellite",zoom=zoom)
-  x<-get_colors_from_map(map,number_of_colors=number_of_colors)
+  x<-get_colors_from_map(map,number_of_colors=number_of_colors,method=method,sampleRate=sampleRate)
   par(mfrow=c(2,1),mar = c(0.5, 0.5, 0.5, 0.5))
   plot(map)
   image(1:number_of_colors, 1, as.matrix(1:number_of_colors), col = x,ylab = "",xlab="", xaxt = "n", yaxt = "n", bty = "n")
@@ -115,14 +136,29 @@ plot_satellite_image_and_pallette <- function(latitude = 24.2,longitude=-77.88,z
 
 
 
-get_colors_from_map<-function(map,number_of_colors){
-  sample.systematically<-seq(from=1,to=length(map),by=50) #this is just to speed things up
+get_colors_from_map<-function(map,number_of_colors,method=method,sampleRate=sampleRate){
+  if (sampleRate < 300) {
+    message("Pam can be slow, consider a larger sampleRate?")
+  }
+  
+  sample.systematically<-seq(from=1,to=length(map),by=sampleRate) #this is just to speed things up
   col.vec<-c(map[sample.systematically])
   col.vec.rgb<-t(col2rgb(col.vec))
   col.vec.lab<-convertColor(col.vec.rgb,from="sRGB",to="Lab",scale.in=255)
   lab.restructure<-data.frame(L=col.vec.lab[,1],a=col.vec.lab[,2],b=col.vec.lab[,3])
-  out<-kmeans(lab.restructure,number_of_colors)
-  out.rgb<-convertColor(out$centers,from="Lab",to="sRGB",scale.out=1)
+  if (method=="kmeans"){
+    out<-kmeans(lab.restructure,number_of_colors)
+    out.rgb<-convertColor(out$centers,from="Lab",to="sRGB",scale.out=1)
+  }
+  if (method=="pam"){
+    if (!requireNamespace("cluster",quietly=TRUE)) {
+      stop("The 'cluster' package is needed for method='pam'. Please install it.",
+           call. = FALSE)
+    }
+    out<-cluster::pam(x=lab.restructure,k=number_of_colors,diss=FALSE)
+    out.rgb<-convertColor(out$medoids,from="Lab",to="sRGB",scale.out=1)
+  }
+  
   return(rgb(out.rgb))
 }
 

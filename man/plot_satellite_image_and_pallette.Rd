@@ -5,7 +5,8 @@
 \title{plot_satellite_image_and_pallette}
 \usage{
 plot_satellite_image_and_pallette(latitude = 24.2, longitude = -77.88,
-  zoom = 11, number_of_colors = 5)
+  zoom = 11, number_of_colors = 2, method = "kmeans",
+  sampleRate = sampleRate)
 }
 \arguments{
 \item{latitude}{}
@@ -15,6 +16,10 @@ plot_satellite_image_and_pallette(latitude = 24.2, longitude = -77.88,
 \item{zoom}{}
 
 \item{number_of_colors}{}
+
+\item{method}{specifies clustering method. Options are \code{kmeans} or \code{pam} (partitioning around medoids)}
+
+\item{sampleRate}{subsampling factor - bigger number = more subsampling}
 }
 \description{
 This returns a color scheme from a geographic place but 
@@ -28,7 +33,7 @@ longitude = 131,zoom=10)
 
 
 world<-plot_satellite_image_and_pallette(latitude = 0,longitude = 0,
-zoom=2,number_of_colors=8)
+zoom=2,number_of_colors=4)
 
 british_columbia_glacier<-plot_satellite_image_and_pallette(latitude = 50.759,
 longitude = -125.673,zoom=10,number_of_colors=4)

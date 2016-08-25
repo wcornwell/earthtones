@@ -5,7 +5,7 @@
 \title{earthtones}
 \usage{
 get_earthtones(latitude = 50.759, longitude = -125.673, zoom = 11,
-  number_of_colors = 3)
+  number_of_colors = 3, method = "kmeans", sampleRate = 50)
 }
 \arguments{
 \item{latitude}{}
@@ -15,6 +15,10 @@ get_earthtones(latitude = 50.759, longitude = -125.673, zoom = 11,
 \item{zoom}{}
 
 \item{number_of_colors}{}
+
+\item{method}{specifies clustering method. Options are \code{kmeans} or \code{pam} (partitioning around medoids)}
+
+\item{sampleRate}{subsampling factor - bigger number = more subsampling}
 }
 \description{
 Getting a color scheme from a place on earth
@@ -34,12 +38,17 @@ british_columbia_glacier<-get_earthtones(latitude = 50.759
  ,longitude = -125.673,zoom=10,number_of_colors=5)
 plot(british_columbia_glacier)
 
- joshua_tree<-get_earthtones(latitude = 33.9, 
+joshua_tree<-get_earthtones(latitude = 33.9, 
  longitude = -115.9,zoom=9,number_of_colors=5)
 plot(joshua_tree)
 
+par(mfrow=c(2,1))
 bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
 zoom=11,number_of_colors=5)
+plot(bahamas)
+
+bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
+zoom=11,number_of_colors=5,method='pam',sampleRate=500)
 plot(bahamas)
 
 
