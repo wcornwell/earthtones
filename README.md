@@ -3,6 +3,8 @@ earthtones
 
 [![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones)
 
+[![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
+
 Here is how to install the package:
 
 ``` r
@@ -17,8 +19,8 @@ Geographic color schemes
 Let's say you wanted a color scheme based on a particular part of the world. For example the grand canyon.
 
 ``` r
-grand_canyon <- plot_satellite_image_and_pallette(latitude = 36.094994,
-                                                longitude=-111.837962, zoom=12, number_of_colors=5)
+get_earthtones(latitude = 36.094994, longitude=-111.837962, 
+               zoom=12, number_of_colors=5)
 ```
 
 ![](readme_files/figure-markdown_github/grand%20canyon-1.png)
@@ -28,8 +30,7 @@ grand_canyon <- plot_satellite_image_and_pallette(latitude = 36.094994,
 Or maybe you want a color scheme drawn from tropical reefs and lagoons.
 
 ``` r
-bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
-                                           longitude=-77.88, zoom=11, number_of_colors=5)
+get_earthtones(latitude = 24.2, longitude=-77.88, zoom=11, number_of_colors=5)
 ```
 
 ![](readme_files/figure-markdown_github/bahamas-1.png)
@@ -37,8 +38,7 @@ bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
 Just pick your favorite place in the world, and find out the major colors
 
 ``` r
-uluru<-plot_satellite_image_and_pallette(latitude = -25.5, 
-                                         longitude = 131, zoom=10, number_of_colors=5)
+get_earthtones(latitude = -25.5, longitude = 131, zoom=10, number_of_colors=5)
 ```
 
 ![](readme_files/figure-markdown_github/uluru-1.png)
@@ -48,7 +48,7 @@ The function `plot_satellite_image_and_pallette` is good for seeing both the ima
 ``` r
 if(!require(ggplot2)) install.packages("ggplot2")
 bahamas_colors <- get_earthtones(latitude = 24.2,
-      longitude=-77.88, zoom=11, number_of_colors=3)
+      longitude=-77.88, zoom=11, number_of_colors=3,include.map=FALSE)
 ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
   geom_point(size = 2.5)+
   scale_color_manual(values = bahamas_colors)+
@@ -62,19 +62,15 @@ And now Fisher's irises are colored in a Bahama style. However, actually data fr
 ``` r
 iris.from.gaspe <- dplyr::filter(iris, Species!="virginica")
 
-plot_satellite_image_and_pallette(latitude = 48.7709,
+get_earthtones(latitude = 48.7709,
   longitude=-64.660939,zoom=9,number_of_colors = 2)
 ```
 
 ![](readme_files/figure-markdown_github/gaspe-1.png)
 
-    ## [1] "#4A5F97" "#294330"
-    ## attr(,"class")
-    ## [1] "palette"
-
 ``` r
 gaspe <- get_earthtones(latitude = 48.7709,
-  longitude=-64.660939 ,zoom=9, number_of_colors = 2)
+  longitude=-64.660939 ,zoom=9, number_of_colors = 2,include.map=FALSE)
 ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
   geom_point(size = 2)+
   scale_color_manual(values = gaspe)+
@@ -83,12 +79,12 @@ ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
 
 ![](readme_files/figure-markdown_github/gaspe-2.png)
 
-There are lots of ways to do the clustering of the colors. The default is the k-means algorithm but there is also the pam one, which is a bit more sophisticated (and computationally intensive).
+There are lots of ways to do the clustering of the colors. The default is pam algorithm but there is also the k-means, which is a bit simpler.
 
-Here is the k-means result:
+Here is the k-means result for the bahamas:
 
 ``` r
-bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
+get_earthtones(latitude = 24.2,
                                            longitude=-77.88, zoom=11, number_of_colors=5,method="kmeans")
 ```
 
@@ -97,13 +93,13 @@ bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
 and here is the pam one
 
 ``` r
-bahamas <- plot_satellite_image_and_pallette(latitude = 24.2,
-                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam")
+get_earthtones(latitude = 24.2,
+                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam",sampleRate = 350)
 ```
 
 ![](readme_files/figure-markdown_github/bahamas_pam-1.png)
 
-The sand-color is perhaps a bit sandier.
+The sand-color is perhaps a bit sandier with the pam approach.
 
 Methods details
 ---------------
