@@ -2,9 +2,7 @@
 title: "earthtones"
 output: github_document
 ---
-[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones)
-
-[![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
+[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones) [![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
 
 Here is how to install the package:
 
@@ -16,11 +14,11 @@ library("earthtones")
 
 ## Geographic color schemes
 
-Let's say you wanted a color scheme based on a particular part of the world.  For example the grand canyon.  
+Let's say you wanted a color scheme based on a particular part of the world.  For example here are some colors from the grand canyon.  
 
 ```{r grand canyon,message=FALSE}
 get_earthtones(latitude = 36.094994, longitude=-111.837962, 
-               zoom=12, number_of_colors=5)
+               zoom=12, number_of_colors=8)
 ```
 
 `number_of_colors` corresponds to how many colors you want back.  The zoom value is passed to `ggmap`--essentially larger values zoom closer to the target lat+long.  
@@ -69,15 +67,15 @@ There are lots of ways to do the clustering of the colors.  The default is pam a
 Here is the k-means result for the bahamas:
 
 ```{r bahamas_kmeans,message=FALSE}
-get_earthtones(latitude = 24.2,
-                                           longitude=-77.88, zoom=11, number_of_colors=5,method="kmeans")
+get_earthtones(latitude = 24.2, longitude=-77.88,
+               zoom=11, number_of_colors=5, method="kmeans")
 ```
 
 and here is the pam one
 
 ```{r bahamas_pam,message=FALSE}
-get_earthtones(latitude = 24.2,
-                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam",sampleRate = 350)
+get_earthtones(latitude = 24.2, longitude=-77.88, 
+               zoom=11, number_of_colors=5, method="pam")
 ```
 
 The sand-color is perhaps a bit sandier with the pam approach.  

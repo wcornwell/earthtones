@@ -31,7 +31,7 @@
 ##' uluru<-get_earthtones(latitude = -25.5,
 ##' longitude = 131,zoom=12,number_of_colors=5)
 ##' 
-##' \dontrun{
+##' \donttest{
 ##' world<-get_earthtones(latitude = 0,longitude = 0,
 ##' zoom=2,number_of_colors=8)
 ##' 

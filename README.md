@@ -1,9 +1,7 @@
 earthtones
 ================
 
-[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones)
-
-[![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
+[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones) [![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
 
 Here is how to install the package:
 
@@ -16,11 +14,11 @@ library("earthtones")
 Geographic color schemes
 ------------------------
 
-Let's say you wanted a color scheme based on a particular part of the world. For example the grand canyon.
+Let's say you wanted a color scheme based on a particular part of the world. For example here are some colors from the grand canyon.
 
 ``` r
 get_earthtones(latitude = 36.094994, longitude=-111.837962, 
-               zoom=12, number_of_colors=5)
+               zoom=12, number_of_colors=8)
 ```
 
 ![](readme_files/figure-markdown_github/grand%20canyon-1.png)
@@ -84,8 +82,8 @@ There are lots of ways to do the clustering of the colors. The default is pam al
 Here is the k-means result for the bahamas:
 
 ``` r
-get_earthtones(latitude = 24.2,
-                                           longitude=-77.88, zoom=11, number_of_colors=5,method="kmeans")
+get_earthtones(latitude = 24.2, longitude=-77.88,
+               zoom=11, number_of_colors=5, method="kmeans")
 ```
 
 ![](readme_files/figure-markdown_github/bahamas_kmeans-1.png)
@@ -93,8 +91,8 @@ get_earthtones(latitude = 24.2,
 and here is the pam one
 
 ``` r
-get_earthtones(latitude = 24.2,
-                                           longitude=-77.88, zoom=11, number_of_colors=5,method="pam",sampleRate = 350)
+get_earthtones(latitude = 24.2, longitude=-77.88, 
+               zoom=11, number_of_colors=5, method="pam")
 ```
 
 ![](readme_files/figure-markdown_github/bahamas_pam-1.png)
