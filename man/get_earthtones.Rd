@@ -2,60 +2,64 @@
 % Please edit documentation in R/earth.R
 \name{get_earthtones}
 \alias{get_earthtones}
-\title{earthtones}
+\title{get_earthtones}
 \usage{
 get_earthtones(latitude = 50.759, longitude = -125.673, zoom = 11,
-  number_of_colors = 3, method = "kmeans", sampleRate = 500)
+  number_of_colors = 3, method = "pam", sampleRate = 500,
+  include.map = TRUE, ...)
 }
 \arguments{
-\item{latitude}{}
+\item{latitude}{center of the returned satellite image}
 
-\item{longitude}{}
+\item{longitude}{center of the returned satellite image}
 
-\item{zoom}{}
+\item{zoom}{higher values zoom in closer to the target lat/long see \code{\link{get_map}}}
 
-\item{number_of_colors}{}
+\item{number_of_colors}{how many colors do you want?}
 
-\item{method}{specifies clustering method. Options are \code{kmeans} or \code{pam} (partitioning around medoids)}
+\item{method}{specifies clustering method. Options are \code{\link{kmeans}} or \code{\link{pam}} (partitioning around medoids)}
 
 \item{sampleRate}{subsampling factor - bigger number = more subsampling}
+
+\item{include.map}{logical flag that determines whether to return the satelitte image with the data object; for exploring the world leave this as TRUE; when you've settled on a color scheme and are using this in a script, change to FALSE}
+
+\item{...}{additional arguments passed to \code{\link{get_map}}}
 }
 \description{
 Getting a color scheme from a place on earth
+}
+\details{
+Different parts of the world have different color diversity.  Zoom is also especially important.
 }
 \examples{
 #
 #
 uluru<-get_earthtones(latitude = -25.5,
 longitude = 131,zoom=12,number_of_colors=5)
-print(uluru)
-plot(uluru)
 
 \dontrun{
 world<-get_earthtones(latitude = 0,longitude = 0,
 zoom=2,number_of_colors=8)
-plot(world)
 
 british_columbia_glacier<-get_earthtones(latitude = 50.759
  ,longitude = -125.673,zoom=10,number_of_colors=5)
-plot(british_columbia_glacier)
 
 joshua_tree<-get_earthtones(latitude = 33.9, 
  longitude = -115.9,zoom=9,number_of_colors=5)
-plot(joshua_tree)
  
 ## Compare clustering methods
 par(mfrow=c(2,1))
-bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
-zoom=11,number_of_colors=5,sampleRate=500)
-plot(bahamas)
+get_earthtones(latitude = 24.2,longitude=-77.88,
+zoom=11,number_of_colors=5,method='kmeans',sampleRate=500)
 
-bahamas<-get_earthtones(latitude = 24.2,longitude=-77.88,
+get_earthtones(latitude = 24.2,longitude=-77.88,
 zoom=11,number_of_colors=5,method='pam',sampleRate=500)
-plot(bahamas)
 }
 
 
 
+}
+\seealso{
+\code{\link{get_map}}, \code{\link{kmeans}}, \code{\link{pam}}
 }
 
