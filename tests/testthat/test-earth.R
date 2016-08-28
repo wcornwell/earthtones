@@ -14,4 +14,5 @@ test_that("test stop() errors", {
       stop("method")
     },
     message = "method.*")
+  expect_message(get_earthtones(sampleRate = 250))
 })

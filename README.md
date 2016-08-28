@@ -11,10 +11,12 @@ devtools::install_github("wcornwell/earthtones")
 library("earthtones")
 ```
 
-Geographic color schemes
-------------------------
+Find the color pallette of particular parts of the world
+--------------------------------------------------------
 
-Let's say you wanted a color scheme based on a particular part of the world. For example here are some colors from the grand canyon.
+This package does a few simple things: 1) downloads a satelitte image, 2) translates the colors into a perceptually uniform color space, 3) runs a clustering method, and 4) returns a color pallette.
+
+There is only one function `get_earthtones`. Here is how you use it, in this case for the grand canyon:
 
 ``` r
 get_earthtones(latitude = 36.094994, longitude=-111.837962, 
@@ -23,9 +25,8 @@ get_earthtones(latitude = 36.094994, longitude=-111.837962,
 
 ![](readme_files/figure-markdown_github/grand%20canyon-1.png)
 
-`number_of_colors` corresponds to how many colors you want back. The zoom value is passed to `ggmap`--essentially larger values zoom closer to the target lat+long.
-
-Or maybe you want a color scheme drawn from tropical reefs and lagoons.
+`number_of_colors` corresponds to how many colors you want back. The `zoom` value is passed to `ggmap::get_map`--essentially larger values zoom closer to the target lat+long.
+Maybe desert colors aren't your thing: you want a color scheme drawn from tropical reefs and lagoons. How about the Bahamas?
 
 ``` r
 get_earthtones(latitude = 24.2, longitude=-77.88, zoom=11, number_of_colors=5)
@@ -35,13 +36,31 @@ get_earthtones(latitude = 24.2, longitude=-77.88, zoom=11, number_of_colors=5)
 
 Just pick your favorite place in the world, and find out the major colors
 
+Here is San Francisco:
+
 ``` r
-get_earthtones(latitude = -25.5, longitude = 131, zoom=10, number_of_colors=5)
+get_earthtones(latitude = 37.89, longitude=-122.28, zoom=11, number_of_colors=12)
 ```
 
-![](readme_files/figure-markdown_github/uluru-1.png)
+![](readme_files/figure-markdown_github/sf-1.png)
 
-The function `plot_satellite_image_and_pallette` is good for seeing both the image and the color palette. To actually use the color, it's much easier to use `get_earthtones`. For example:
+or the golden gate bridge:
+
+``` r
+get_earthtones(latitude = 37.81391, longitude=-122.478289, zoom=19, number_of_colors=12)
+```
+
+![](readme_files/figure-markdown_github/ggb-1.png)
+
+or Sydney Opera House :
+
+``` r
+get_earthtones(latitude = -33.857077, longitude=151.214722, zoom=17, number_of_colors=12)
+```
+
+![](readme_files/figure-markdown_github/opera-1.png)
+
+If you want to actually use the color scheme for graphing or something and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map==FALSE` to the function call, and the function will only return the color palette for later use:
 
 ``` r
 if(!require(ggplot2)) install.packages("ggplot2")
@@ -70,12 +89,15 @@ get_earthtones(latitude = 48.7709,
 gaspe <- get_earthtones(latitude = 48.7709,
   longitude=-64.660939 ,zoom=9, number_of_colors = 2,include.map=FALSE)
 ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
-  geom_point(size = 2)+
+  geom_point(size = 2.5)+
   scale_color_manual(values = gaspe)+
   theme_bw()
 ```
 
 ![](readme_files/figure-markdown_github/gaspe-2.png)
+
+Some notes on clustering methods
+--------------------------------
 
 There are lots of ways to do the clustering of the colors. The default is pam algorithm but there is also the k-means, which is a bit simpler.
 
@@ -98,12 +120,3 @@ get_earthtones(latitude = 24.2, longitude=-77.88,
 ![](readme_files/figure-markdown_github/bahamas_pam-1.png)
 
 The sand-color is perhaps a bit sandier with the pam approach.
-
-Methods details
----------------
-
-1.  This library gets an image from Google earth which come from different sources depending on the zoom and the particular place.
-
-2.  It then extracts the colors in the image, translates them into a perceptually uniform color space and then runs one of a few different clustering algorithms to find the major colors for an area
-
-3.  These are then converted back into a R style color pallete.
