@@ -35,3 +35,14 @@ vignettes/*.pdf
 .Rproj.user
 
 readme.html
+*.o
+src/*.o-*
+*.so
+*.dll
+.RData
+.Rproj.user
+.Rhistory
+inst/doc
+.httr-oauth
+vignettes/*.R
+.DS_Store
