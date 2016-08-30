@@ -1,10 +1,11 @@
 Package: earthtones
-Title: Derive a Color Scheme from a Particular Location on Earth
+Title: Derive a Color Palette from a Particular Location on Earth
 Version: 0.1.0
 Date: 2016-08-22
-Description: Earthtones downloads a satellite image from google earth, 
+Description: This package downloads a satellite image via Google Earth (these are
+    often originally from Landsat), 
     translates the image into a perceptually uniform color space,
-    runs one of a few different clustering algorhitms on the colors in the image 
+    runs one of a few different clustering algorithms on the colors in the image 
     searching for a user supplied number of colors,
     and returns the resulting color palette.  
 Depends:
