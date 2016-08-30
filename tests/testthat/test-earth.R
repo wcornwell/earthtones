@@ -11,7 +11,7 @@ test_that("returns normal", {
 
 test_that("test stop() errors", {
   expect_error(earthtones::get_earthtones(method="42"), message = "hello method.*")
-  expect_error(expr = if (!requireNamespace("cluster",quietly=TRUE)) {
+  expect_error(if (!requireNamespace("cluster",quietly=TRUE)) {
     earthtones::get_earthtones(method="pam")
     } else {
       stop("method")
