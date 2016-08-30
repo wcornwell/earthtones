@@ -1,15 +1,15 @@
 ---
 title: "earthtones"
-output: github_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{earthtones}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
-[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones) [![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
 
-Here is how to install the package:
-
-```{r setup, include=TRUE,message=FALSE,warning=FALSE}
-if(!require(devtools)) install.packages("devtools")
-devtools::install_github("wcornwell/earthtones")
+```{r setup, include=FALSE,message=FALSE,warning=FALSE}
 library("earthtones")
+requireNamespace("ggplot2", quietly = TRUE)
 ```
 
 ## Find the color pallette of particular parts of the world
@@ -54,10 +54,10 @@ get_earthtones(latitude = -33.857077, longitude=151.214722, zoom=17, number_of_c
 If you want to actually use the color scheme for graphing or something and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
 
 ```{r bahama_iris,message=FALSE}
-if(!require(ggplot2)) install.packages("ggplot2")
+require(ggplot2)
 bahamas_colors <- get_earthtones(latitude = 24.2,
       longitude=-77.88, zoom=11, number_of_colors=3,include.map=FALSE)
-ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
+ggplot2::ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
   geom_point(size = 2.5)+
   scale_color_manual(values = bahamas_colors)+
   theme_bw()
@@ -66,13 +66,13 @@ ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
 And now Fisher's irises are colored in a Bahama style.  However, actually data from two of the three iris speces was collected by a botanist named Edgar Anderson from the [Gaspé Peninsula in Quebec](https://www.jstor.org/stable/2394164?seq=1#page_scan_tab_contents), so it might be better to use a color scheme from there for those two species.  
 
 ```{R gaspe,message=FALSE}
-iris.from.gaspe <- dplyr::filter(iris, Species!="virginica")
+iris.from.gaspe <- subset(iris, iris$Species!="virginica")
 
 get_earthtones(latitude = 48.7709,
   longitude=-64.660939,zoom=9,number_of_colors = 2)
 gaspe <- get_earthtones(latitude = 48.7709,
   longitude=-64.660939 ,zoom=9, number_of_colors = 2,include.map=FALSE)
-ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
+ggplot2::ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
   geom_point(size = 2.5)+
   scale_color_manual(values = gaspe)+
   theme_bw()

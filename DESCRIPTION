@@ -1,17 +1,26 @@
 Package: earthtones
-Title: Find the dominant colors for a location on earth
+Title: Derive a Color Scheme from a Particular Location on Earth
 Version: 0.1.0
 Date: 2016-08-22
-Description: Earthtones picks a color scheme for you based on a geographic location on earth.  
+Description: Earthtones downloads a satellite image from google earth, 
+    translates the image into a perceptually uniform color space,
+    runs one of a few different clustering algorhitms on the colors in the image 
+    searching for a user supplied number of colors,
+    and returns the resulting color palette.  
 Depends:
     R (>= 3.1.0)
 License: MIT + file LICENSE
 LazyData: true
-Authors@R: as.person(c("Will Cornwell <wcornwell@gmail.com> [aut, cre]"))
+Author: Will Cornwell, Mitch Lyons, Nick Murray
 Maintainer: Will Cornwell <wcornwell@gmail.com>
 Imports:
   ggmap (>= 2.6.1)
 Suggests: 
   testthat,
-  cluster
+  cluster,
+  knitr,
+  rmarkdown,
+  ggplot2
+VignetteBuilder: knitr
 RoxygenNote: 5.0.1
+ 

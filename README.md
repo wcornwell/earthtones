@@ -60,7 +60,7 @@ get_earthtones(latitude = -33.857077, longitude=151.214722, zoom=17, number_of_c
 
 ![](readme_files/figure-markdown_github/opera-1.png)
 
-If you want to actually use the color scheme for graphing or something and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map==FALSE` to the function call, and the function will only return the color palette for later use:
+If you want to actually use the color scheme for graphing or something and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
 
 ``` r
 if(!require(ggplot2)) install.packages("ggplot2")

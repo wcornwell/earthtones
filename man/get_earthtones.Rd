@@ -2,7 +2,7 @@
 % Please edit documentation in R/earth.R
 \name{get_earthtones}
 \alias{get_earthtones}
-\title{get_earthtones}
+\title{Find the color pallette of a particular place on earth}
 \usage{
 get_earthtones(latitude = 50.759, longitude = -125.673, zoom = 11,
   number_of_colors = 3, method = "pam", sampleRate = 500,
@@ -13,47 +13,46 @@ get_earthtones(latitude = 50.759, longitude = -125.673, zoom = 11,
 
 \item{longitude}{center of the returned satellite image}
 
-\item{zoom}{higher values zoom in closer to the target lat/long see \code{\link{get_map}}}
+\item{zoom}{generally this should be between 2 and 20; higher values zoom in closer to the target lat/long; for details see \code{\link{get_map}}}
 
 \item{number_of_colors}{how many colors do you want?}
 
 \item{method}{specifies clustering method. Options are \code{\link{kmeans}} or \code{\link{pam}} (partitioning around medoids)}
 
-\item{sampleRate}{subsampling factor - bigger number = more subsampling}
+\item{sampleRate}{subsampling factor - bigger number = more subsampling and less computation}
 
 \item{include.map}{logical flag that determines whether to return the satelitte image with the data object; for exploring the world leave this as TRUE; when you've settled on a color scheme and are using this in a script, change to FALSE}
 
 \item{...}{additional arguments passed to \code{\link{get_map}}}
 }
 \description{
-Getting a color scheme from a place on earth
+Earthtones downloads a satellite image from google earth, translates the image into a perceptually uniform color space, runs one of a few different clustering algorhitms on the colors in the imagesearching for a user supplied number of colors, and returns the resulting color palette.
 }
 \details{
-Different parts of the world have different color diversity.  Zoom is also especially important.
+Different parts of the world have different color diversity.  Zoom is also especially important.  To visualize the results, simply print the resulting object.
 }
 \examples{
-#
-#
-uluru<-get_earthtones(latitude = -25.5,
-longitude = 131,zoom=12,number_of_colors=5)
+
+uluru <- get_earthtones(latitude = -25.5,
+longitude = 131, zoom=12, number_of_colors=5)
 
 \donttest{
-world<-get_earthtones(latitude = 0,longitude = 0,
-zoom=2,number_of_colors=8)
+world <- get_earthtones(latitude = 0, longitude = 0,
+zoom = 2, number_of_colors = 8)
 
-british_columbia_glacier<-get_earthtones(latitude = 50.759
- ,longitude = -125.673,zoom=10,number_of_colors=5)
+british_columbia_glacier <- get_earthtones(latitude = 50.759,
+longitude = -125.673, zoom = 10, number_of_colors = 5)
 
-joshua_tree<-get_earthtones(latitude = 33.9, 
- longitude = -115.9,zoom=9,number_of_colors=5)
+joshua_tree <- get_earthtones(latitude = 33.9, 
+ longitude = -115.9, zoom = 9, number_of_colors = 5)
  
 ## Compare clustering methods
 par(mfrow=c(2,1))
-get_earthtones(latitude = 24.2,longitude=-77.88,
-zoom=11,number_of_colors=5,method='kmeans',sampleRate=500)
+get_earthtones(latitude = 24.2,longitude = -77.88,
+zoom = 11, number_of_colors = 5 ,method = 'kmeans', sampleRate = 500)
 
-get_earthtones(latitude = 24.2,longitude=-77.88,
-zoom=11,number_of_colors=5,method='pam',sampleRate=500)
+get_earthtones(latitude = 24.2, longitude = -77.88,
+zoom = 11, number_of_colors = 5 , method = 'pam', sampleRate = 500)
 }
 
 
