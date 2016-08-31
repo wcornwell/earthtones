@@ -15,7 +15,7 @@ requireNamespace("ggplot2", quietly = TRUE)
 ## Find the color pallette of particular parts of the world
 
 This package does a few simple things: 
-1. downloads a satellite image from google earth which in turn comes from a variety of sources, but many are from Landsat.
+1. downloads an image from google earth, which in turn comes from a variety of sources, sometimes they are aerial photos.
 2. translates the colors in the image into a perceptually uniform color space
 3. runs a clustering method on the pixels in that color space
 4. returns a color palette.  
@@ -68,7 +68,7 @@ ggplot2::ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
   theme_bw()
 ```
 
-And now Fisher's irises are colored in a Bahama style.  However, actually data from two of the three iris species was collected by a botanist named Edgar Anderson from the [Gaspé Peninsula in Quebec](https://www.jstor.org/stable/2394164?seq=1#page_scan_tab_contents), so it might be better to use a color scheme from there for those two species.  
+And now Fisher's irises are colored in a Bahama style.  However, data from two of the three iris species was actually collected by a botanist named Edgar Anderson from the [Gaspé Peninsula in Quebec](https://www.jstor.org/stable/2394164?seq=1#page_scan_tab_contents), so it might be better to use a color scheme from there for those two species.  
 
 ```{R gaspe,message=FALSE,dpi=100}
 iris.from.gaspe <- subset(iris, iris$Species!="virginica")
@@ -101,7 +101,7 @@ get_earthtones(latitude = 24.2, longitude=-77.88,
                zoom=11, number_of_colors=5, method="pam")
 ```
 
-The sand-color is perhaps a bit sandier with the PAM approach.  This actually makes sense because the PAM method returns medoid rather than means so the outputs are guaranteed to be actual colors in the image.  For the k-mean method the mean of the colors may actually be color that is not itself present in the image.  
+The sand-color is perhaps a bit sandier with the PAM approach.  This actually makes sense because the PAM method returns medoids rather than centroids so the outputs are guaranteed to be actual colors in the image.  For the k-means method the mean of the colors may actually be a color that is not itself present in the image.  
 
 ## Inspiration
 
