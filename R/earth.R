@@ -1,5 +1,5 @@
 
-##' Earthtones downloads a satellite image from google earth, translates the image into a perceptually uniform color space, runs one of a few different clustering algorhitms on the colors in the imagesearching for a user supplied number of colors, and returns the resulting color palette.  
+##' Earthtones downloads a satellite image from google earth, translates the image into a perceptually uniform color space, runs one of a few different clustering algorhitms on the colors in the image searching for a user supplied number of colors, and returns the resulting color palette.  
 ##'
 ##'
 ##' @title Find the color pallette of a particular place on earth
@@ -16,7 +16,7 @@
 ##' 
 ##' @param sampleRate subsampling factor - bigger number = more subsampling and less computation
 ##' 
-##' @param include.map logical flag that determines whether to return the satelitte image with the data object; for exploring the world leave this as TRUE; when you've settled on a color scheme and are using this in a script, change to FALSE
+##' @param include.map logical flag that determines whether to return the satelitte image with the data object; for exploring the world leave this as TRUE; if/when you settle on a color scheme and are using this within a visualization, change to FALSE and the function will return a normal R-style color palette.  
 ##' 
 ##' @param ... additional arguments passed to \code{\link{get_map}}
 ##'
@@ -27,33 +27,13 @@
 ##' @export
 ##' @examples
 ##' 
-##' uluru <- get_earthtones(latitude = -25.5,
-##' longitude = 131, zoom=12, number_of_colors=5)
-##' 
-##' \donttest{
-##' world <- get_earthtones(latitude = 0, longitude = 0,
-##' zoom = 2, number_of_colors = 8)
-##' 
-##' british_columbia_glacier <- get_earthtones(latitude = 50.759,
-##' longitude = -125.673, zoom = 10, number_of_colors = 5)
-##' 
-##' joshua_tree <- get_earthtones(latitude = 33.9, 
-##'  longitude = -115.9, zoom = 9, number_of_colors = 5)
-##'  
-##' ## Compare clustering methods
-##' par(mfrow=c(2,1))
-##' get_earthtones(latitude = 24.2,longitude = -77.88,
-##' zoom = 11, number_of_colors = 5 ,method = 'kmeans', sampleRate = 500)
-##' 
-##' get_earthtones(latitude = 24.2, longitude = -77.88,
-##' zoom = 11, number_of_colors = 5 , method = 'pam', sampleRate = 500)
-##' }
-##' 
+##' get_earthtones(latitude = 24.2, longitude = -77.88, zoom = 11, number_of_colors = 5)
 ##' 
 ##' 
 
 get_earthtones <- function(latitude=50.759, longitude=-125.673,
-                           zoom=11,number_of_colors=3,method="pam",sampleRate=500,include.map=TRUE,...) {
+                           zoom=11,number_of_colors=3,method="pam",
+                           sampleRate=500,include.map=TRUE,...) {
   # test specified method is supported
   supported_methods<-c("kmeans","pam")
   if (!method %in% supported_methods) {
@@ -79,17 +59,16 @@ print.palette <- function(x, ...) {
   number_of_colors<-length(x$pal)
   par(mfrow=c(2,1),mar = c(0.5, 0.5, 0.5, 0.5))
   plot(x$map)
-  image(1:number_of_colors, 1, as.matrix(1:number_of_colors), col = x$pal,ylab = "",xlab="", xaxt = "n", yaxt = "n", bty = "n")
+  image(1:number_of_colors, 1, as.matrix(1:number_of_colors), col = x$pal,ylab = "", 
+        xlab="", xaxt = "n", yaxt = "n", bty = "n")
 }
-
-
 
 get_colors_from_map<-function(map,number_of_colors,clust.method,subsampleRate){
   if (subsampleRate < 300 & clust.method=="pam") {
     message("Pam can be slow, consider a larger sampleRate?")
   }
-  sample.systematically<-seq(from=1,to=length(map),by=subsampleRate) #this is just to speed things up
-  col.vec<-c(map[sample.systematically])
+  map.without.branding<-map[1:1240,1:1280] #exclude google logo from color calculations
+  col.vec<-c(map.without.branding[seq(from=1,to=length(map.without.branding),by=subsampleRate)]) #this is just to speed things up
   col.vec.rgb<-t(col2rgb(col.vec))
   col.vec.lab<-convertColor(col.vec.rgb,from="sRGB",to="Lab",scale.in=255)
   lab.restructure<-data.frame(L=col.vec.lab[,1],a=col.vec.lab[,2],b=col.vec.lab[,3])

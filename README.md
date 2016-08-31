@@ -7,7 +7,7 @@ Here is how to install the package:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
-devtools::install_github("wcornwell/earthtones")
+#devtools::install_github("wcornwell/earthtones")
 library("earthtones")
 ```
 
@@ -55,7 +55,7 @@ get_earthtones(latitude = 37.81391, longitude=-122.478289, zoom=19, number_of_co
 or Sydney Opera House :
 
 ``` r
-get_earthtones(latitude = -33.857077, longitude=151.214722, zoom=17, number_of_colors=12)
+get_earthtones(latitude = -33.85745, longitude=151.214722, zoom=17, number_of_colors=10)
 ```
 
 ![](readme_files/figure-markdown_github/opera-1.png)
@@ -77,7 +77,7 @@ ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
 And now Fisher's irises are colored in a Bahama style. However, actually data from two of the three iris speces was collected by a botanist named Edgar Anderson from the [Gaspé Peninsula in Quebec](https://www.jstor.org/stable/2394164?seq=1#page_scan_tab_contents), so it might be better to use a color scheme from there for those two species.
 
 ``` r
-iris.from.gaspe <- dplyr::filter(iris, Species!="virginica")
+iris.from.gaspe <- subset(iris, iris$Species!="virginica")
 
 get_earthtones(latitude = 48.7709,
   longitude=-64.660939,zoom=9,number_of_colors = 2)
