@@ -15,8 +15,8 @@ requireNamespace("ggplot2", quietly = TRUE)
 ## Find the color pallette of particular parts of the world
 
 This package does a few simple things: 
-1. downloads a satellite image
-2. translates the colors into a perceptually uniform color space
+1. downloads a satellite image from google earth which in turn comes from a variety of sources, but many are from Landsat.
+2. translates the colors in the image into a perceptually uniform color space
 3. runs a clustering method on the pixels in that color space
 4. returns a color palette.  
 
@@ -102,3 +102,7 @@ get_earthtones(latitude = 24.2, longitude=-77.88,
 ```
 
 The sand-color is perhaps a bit sandier with the PAM approach.  This actually makes sense because the PAM method returns medoid rather than means so the outputs are guaranteed to be actual colors in the image.  For the k-mean method the mean of the colors may actually be color that is not itself present in the image.  
+
+## Inspiration
+
+There are some other cool things to do with the cool and images in the [RImagePallette package](https://github.com/joelcarlson/RImagePalette).  And there is a very cool blog on [the colors of Antartica](https://havecamerawilltravel.com/colors-antarctica/).  And of course if you want a quirky cinematic color scheme, check out [wesanderson](https://github.com/karthik/wesanderson).
