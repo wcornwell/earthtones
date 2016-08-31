@@ -33,8 +33,10 @@ Different parts of the world have different color diversity.  Zoom is also espec
 }
 \examples{
 
-get_earthtones(latitude = 24.2, longitude = -77.88, zoom = 11, number_of_colors = 5)
+\dontrun{
 
+get_earthtones(latitude = 24.2, longitude = -77.88, zoom = 11, number_of_colors = 5)
+}
 
 }
 \seealso{

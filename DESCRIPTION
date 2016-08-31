@@ -1,6 +1,6 @@
 Package: earthtones
 Title: Derive a Color Palette from a Particular Location on Earth
-Version: 0.1-0
+Version: 0.0.0.9000
 Date: 2016-08-31
 Description: This package downloads a satellite image via Google Earth (these are
     often originally from Landsat), 

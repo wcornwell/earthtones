@@ -27,8 +27,10 @@
 ##' @export
 ##' @examples
 ##' 
-##' get_earthtones(latitude = 24.2, longitude = -77.88, zoom = 11, number_of_colors = 5)
+##' \dontrun{
 ##' 
+##' get_earthtones(latitude = 24.2, longitude = -77.88, zoom = 11, number_of_colors = 5)
+##' }
 ##' 
 
 get_earthtones <- function(latitude=50.759, longitude=-125.673,
