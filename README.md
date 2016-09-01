@@ -14,7 +14,12 @@ library("earthtones")
 Find the color pallette of particular parts of the world
 --------------------------------------------------------
 
-This package does a few simple things: 1) downloads a satelitte image, 2) translates the colors into a perceptually uniform color space, 3) runs a clustering method, and 4) returns a color pallette.
+This package does the following:
+
+1.  Downloads a image of a particular place from google earth/maps. Google uses a variety of sources for these images depending on the place and zoom
+2.  Translates the colors into a perceptually uniform color space--CIE LAB
+3.  Runs a clustering method (currently supporting choice of two different methods)
+4.  Returns a color pallette
 
 There is only one function `get_earthtones`. Here is how you use it, in this case for the grand canyon:
 
@@ -26,6 +31,7 @@ get_earthtones(latitude = 36.094994, longitude=-111.837962,
 ![](readme_files/figure-markdown_github/grand%20canyon-1.png)
 
 `number_of_colors` corresponds to how many colors you want back. The `zoom` value is passed to `ggmap::get_map`--essentially larger values zoom closer to the target lat+long.
+
 Maybe desert colors aren't your thing: you want a color scheme drawn from tropical reefs and lagoons. How about the Bahamas?
 
 ``` r
@@ -44,7 +50,7 @@ get_earthtones(latitude = 37.89, longitude=-122.28, zoom=11, number_of_colors=12
 
 ![](readme_files/figure-markdown_github/sf-1.png)
 
-or the golden gate bridge:
+or the Golden Gate Bridge:
 
 ``` r
 get_earthtones(latitude = 37.81391, longitude=-122.478289, zoom=19, number_of_colors=12)
@@ -60,7 +66,7 @@ get_earthtones(latitude = -33.85745, longitude=151.214722, zoom=17, number_of_co
 
 ![](readme_files/figure-markdown_github/opera-1.png)
 
-If you want to actually use the color scheme for graphing or something and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
+If you want to actually use the color scheme for another visualization and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
 
 ``` r
 if(!require(ggplot2)) install.packages("ggplot2")
@@ -74,7 +80,7 @@ ggplot(iris, aes(x=Petal.Length, y=Petal.Width, col=Species))+
 
 ![](readme_files/figure-markdown_github/bahama_iris-1.png)
 
-And now Fisher's irises are colored in a Bahama style. However, actually data from two of the three iris speces was collected by a botanist named Edgar Anderson from the [Gaspé Peninsula in Quebec](https://www.jstor.org/stable/2394164?seq=1#page_scan_tab_contents), so it might be better to use a color scheme from there for those two species.
+And now Fisher's irises are colored Bahamas-style. However, data from two of the three iris species was actually collected by a botanist named Edgar Anderson from the [Gaspé Peninsula in Quebec](https://www.jstor.org/stable/2394164?seq=1#page_scan_tab_contents), so it might be better to use a color scheme from there for those two species.
 
 ``` r
 iris.from.gaspe <- subset(iris, iris$Species!="virginica")
@@ -99,7 +105,7 @@ ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
 Some notes on clustering methods
 --------------------------------
 
-There are lots of ways to do the clustering of the colors. The default is pam algorithm but there is also the k-means, which is a bit simpler.
+There are lots of ways to do the clustering in genearl and also in this particular case. The default is pam algorithm (for reasons explained below) but there is also k-means, which is a classic clustering method and is a bit simpler and faster.
 
 Here is the k-means result for the bahamas:
 
@@ -119,7 +125,7 @@ get_earthtones(latitude = 24.2, longitude=-77.88,
 
 ![](readme_files/figure-markdown_github/bahamas_pam-1.png)
 
-The sand-color is perhaps a bit sandier with the pam approach.
+The sand-color is perhaps a bit sandier with the PAM approach. This actually makes sense because the PAM method returns medoids rather than centroids so the outputs are guaranteed to be actual colors in the image. When using the k-means method, the centroid of a set of colors may actually be a color that is not itself present in the image.
 
 Inspiration
 -----------
