@@ -1,13 +1,16 @@
 earthtones
 ================
 
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/earthtones)](https://cran.r-project.org/package=earthtones)
+
+------------------------------------------------------------------------
+
 [![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones) [![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
 
-Here is how to install the package:
+Here is how to install and load the R package:
 
 ``` r
-if(!require(devtools)) install.packages("devtools")
-#devtools::install_github("wcornwell/earthtones")
+install.packages("earthtones",repos = "https://cloud.r-project.org/")
 library("earthtones")
 ```
 
@@ -131,3 +134,13 @@ Inspiration
 -----------
 
 There are some other cool things to do with the cool and images in the [RImagePallette package](https://github.com/joelcarlson/RImagePalette). And there is a very cool blog on [the colors of Antartica](https://havecamerawilltravel.com/colors-antarctica/). And of course if you want a quirky cinematic color scheme, check out [wesanderson](https://github.com/karthik/wesanderson).
+
+Development version
+-------------------
+
+If you'd like to try the most recent development version of `earthtones` run this:
+
+``` r
+if(!require(devtools)) install.packages("devtools")
+devtools::install_github("wcornwell/earthtones")
+```
