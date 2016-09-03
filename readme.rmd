@@ -1,19 +1,42 @@
 ---
-title: "earthtones"
-output: github_document
-self.contained: FALSE
+title: earthtones
+output:
+  md_document:
+    variant: markdown_github
 ---
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "readme_files/figure-markdown_github/"
+)
+```
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones)
+[![codecov](https://codecov.io/gh/wcornwell/earthtones/branch/master/graph/badge.svg)](https://codecov.io/gh/wcornwell/earthtones)
+ 
+---
+ 
 ```{r, echo = FALSE}
 description <- readLines("DESCRIPTION")
 rvers <- stringr::str_match(grep("R \\(", description, value = TRUE), "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}")[1,1]
 ```
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-`r rvers`-6666ff.svg)](https://cran.r-project.org/)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/earthtones)](https://cran.r-project.org/package=earthtones)
-
+```{r, echo = FALSE}
+description <- readLines("DESCRIPTION")
+version <- gsub(" ", "", gsub("Version:", "", grep("Version:", description, value = TRUE)))
+```
+[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master)
+ 
 ---
+ 
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
 
-[![Build Status](https://travis-ci.org/wcornwell/earthtones.svg?branch=master)](https://travis-ci.org/wcornwell/earthtones) [![coverage](https://codecov.io/github/wcornwell/earthtones/coverage.svg?branch=master)](https://codecov.io/github/wcornwell/earthtones/)
+
 
 Here is how to install and load the R package:
 
@@ -22,7 +45,7 @@ install.packages("earthtones",repos = "https://cloud.r-project.org/")
 library("earthtones")
 ```
 
-## Find the color pallette of particular parts of the world
+## Find the color palette of particular parts of the world
 
 This package does the following: 
 
