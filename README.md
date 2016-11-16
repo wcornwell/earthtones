@@ -3,7 +3,7 @@
 
 ------------------------------------------------------------------------
 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/earthtones)](https://cran.r-project.org/package=earthtones)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/earthtones)](https://cran.r-project.org/package=earthtones) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/earthtones)](http://www.r-pkg.org/pkg/earthtones)
 
 [![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](commits/master)
 
@@ -11,13 +11,11 @@
 
 [![Last-changedate](https://img.shields.io/badge/last%20change-2016--09--03-yellowgreen.svg)](/commits/master)
 
+
 Here is how to install and load the R package:
 
 ``` r
-install.packages("earthtones",repos = "https://cloud.r-project.org/")
-#> 
-#> The downloaded binary packages are in
-#>  /var/folders/hn/tsf007g12v3blrjtn9mdjrt00000gn/T//RtmpseIxzZ/downloaded_packages
+install.packages("earthtones")
 library("earthtones")
 ```
 
