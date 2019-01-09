@@ -18,6 +18,7 @@ Here is how to install and load the R package:
 install.packages("earthtones")
 library("earthtones")
 ```
+**NOTE: Due to changes in the Google Maps API, it's a bit harder to get the ggmap package (on which earthtones depends) working.  See the [github page for ggmap](https://github.com/dkahle/ggmap) for more information and instructions.**  
 
 Find the color palette of particular parts of the world
 -------------------------------------------------------
