@@ -15,7 +15,7 @@ LazyData: true
 Author: Will Cornwell, Mitch Lyons, Nick Murray
 Maintainer: Will Cornwell <wcornwell@gmail.com>
 Imports:
-  ggmap (>= 2.7.0)
+  ggmap (>= 2.6.1)
 Suggests: 
   testthat,
   cluster,
@@ -23,5 +23,4 @@ Suggests:
   rmarkdown,
   ggplot2
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
- 
+RoxygenNote: 6.0.1
