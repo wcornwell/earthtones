@@ -75,7 +75,7 @@ get_earthtones(latitude = -33.85745, longitude=151.214722, zoom=17, number_of_co
 
 ![](readme_files/figure-markdown_github/opera-1.png)
 
-If you want to actually use the color scheme for another visualization and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
+If you want to actually use the color scheme for another visualization and not just plot pretty pictures, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
 
 ``` r
 if(!require(ggplot2)) install.packages("ggplot2")
@@ -114,7 +114,7 @@ ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
 Some notes on clustering methods
 --------------------------------
 
-There are lots of ways to do the clustering in genearl and also in this particular case. The default is pam algorithm (for reasons explained below) but there is also k-means, which is a classic clustering method and is a bit simpler and faster.
+There are lots of ways to do the clustering in general and also in this particular case. The default is pam algorithm (for reasons explained below) but there is also k-means, which is a classic clustering method and is a bit simpler and faster.
 
 Here is the k-means result for the bahamas:
 
@@ -139,7 +139,7 @@ The sand-color is perhaps a bit sandier with the PAM approach. This actually mak
 Inspiration
 -----------
 
-There are some other cool things to do with the cool and images in the [RImagePallette package](https://github.com/joelcarlson/RImagePalette). And there is a very cool blog on [the colors of Antartica](https://havecamerawilltravel.com/colors-antarctica/). And of course if you want a quirky cinematic color scheme, check out [wesanderson](https://github.com/karthik/wesanderson).
+There are some other cool things to do with the cool and images in the [RImagePallette package](https://github.com/joelcarlson/RImagePalette). And there is a very cool blog on [the colors of Antarctica](https://havecamerawilltravel.com/colors-antarctica/). And of course if you want a quirky cinematic color scheme, check out [wesanderson](https://github.com/karthik/wesanderson).
 
 Development version
 -------------------
