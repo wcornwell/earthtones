@@ -28,7 +28,7 @@ This package does the following:
 1.  Downloads a image of a particular place from google earth/maps. Google uses a variety of sources for these images depending on the place and zoom
 2.  Translates the colors into a perceptually uniform color space--CIE LAB
 3.  Runs a clustering method (currently supporting choice of two different methods)
-4.  Returns a color pallette
+4.  Returns a color palette
 
 There is only one function `get_earthtones`. Here is how you use it, in this case for the grand canyon:
 

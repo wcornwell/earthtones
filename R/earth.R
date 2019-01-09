@@ -2,7 +2,7 @@
 ##' Earthtones downloads a satellite image from google earth, translates the image into a perceptually uniform color space, runs one of a few different clustering algorithms on the colors in the image searching for a user supplied number of colors, and returns the resulting color palette.  
 ##'
 ##'
-##' @title Find the color pallette of a particular place on earth
+##' @title Find the color palette of a particular place on earth
 ##'
 ##' @param latitude center of the returned satellite image
 ##'
