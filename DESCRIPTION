@@ -1,6 +1,6 @@
 Package: earthtones
 Title: Derive a Color Palette from a Particular Location on Earth
-Version: 0.1.0
+Version: 0.1.1
 Date: 2016-08-31
 Description: Downloads a satellite image via Google Maps/Earth (these are
     originally from a variety of aerial photography sources), 
@@ -15,7 +15,7 @@ LazyData: true
 Author: Will Cornwell, Mitch Lyons, Nick Murray
 Maintainer: Will Cornwell <wcornwell@gmail.com>
 Imports:
-  ggmap (>= 2.6.1)
+  ggmap (>= 2.7.0)
 Suggests: 
   testthat,
   cluster,
