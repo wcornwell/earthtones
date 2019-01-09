@@ -2,7 +2,7 @@
 % Please edit documentation in R/earth.R
 \name{get_earthtones}
 \alias{get_earthtones}
-\title{Find the color pallette of a particular place on earth}
+\title{Find the color palette of a particular place on earth}
 \usage{
 get_earthtones(latitude = 50.759, longitude = -125.673, zoom = 11,
   number_of_colors = 3, method = "pam", sampleRate = 500,
