@@ -42,4 +42,3 @@ get_earthtones(latitude = 24.2, longitude = -77.88, zoom = 11, number_of_colors 
 \seealso{
 \code{\link{get_map}}, \code{\link{kmeans}}, \code{\link{pam}}
 }
-

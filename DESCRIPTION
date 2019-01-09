@@ -22,5 +22,4 @@ Suggests:
   knitr,
   rmarkdown,
   ggplot2
-VignetteBuilder: knitr
 RoxygenNote: 6.0.1
