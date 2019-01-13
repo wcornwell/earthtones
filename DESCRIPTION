@@ -1,7 +1,7 @@
 Package: earthtones
 Title: Derive a Color Palette from a Particular Location on Earth
 Version: 0.1.1
-Date: 2018-01-09
+Date: 2018-01-13
 Description: Downloads a satellite image via Google Maps/Earth (these are
     originally from a variety of aerial photography sources), 
     translates the image into a perceptually uniform color space,

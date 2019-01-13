@@ -14,4 +14,6 @@ This is a new version to adapt to some changes in the Google Maps API
 
 There are no reverse dependencies.
 
+## Fixes
 
+Adjusting data following note.  
