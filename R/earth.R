@@ -22,7 +22,7 @@
 ##'
 ##' @details Different parts of the world have different color diversity.  Zoom is also especially important.  To visualize the results, simply print the resulting object.  
 ##' 
-##' @seealso \code{\link{get_map}}, \code{\link{kmeans}}, \code{\link{pam}} 
+##' @seealso \code{\link{get_map}}, \code{\link{kmeans}} 
 ##' @import grDevices stats graphics
 ##' @export
 ##' @examples
