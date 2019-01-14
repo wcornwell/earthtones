@@ -2,8 +2,8 @@ context("earthtones")
 
 ## Need to do something nice here with testing?
 test_that("returns normal", {
-  if(packageDescription("ggmap")$Version == "2.7.900"){
-  if(ggmap::has_goog_key()){
+  if(grepl("2.7.",packageDescription("ggmap")$Version )){
+  if(ggmap::has_google_key()){
   expect_is(get_earthtones(),"palette")
   expect_is(get_earthtones(method="kmeans"),"palette")
   expect_null(print(get_earthtones()))

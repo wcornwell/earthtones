@@ -3,22 +3,25 @@
 
 ------------------------------------------------------------------------
 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/earthtones)](https://cran.r-project.org/package=earthtones) [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/earthtones)](http://www.r-pkg.org/pkg/earthtones)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1.0-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/earthtones)](https://cran.r-project.org/package=earthtones)
 
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.1.1-orange.svg?style=flat-square)](commits/master)
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2016--09--03-yellowgreen.svg)](/commits/master)
-
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--01--14-yellowgreen.svg)](/commits/master)
 
 Here is how to install and load the R package:
 
 ``` r
-install.packages("earthtones")
+install.packages("earthtones",repos = "https://cloud.r-project.org/")
+#> 
+#>   There is a binary version available but the source version is
+#>   later:
+#>            binary source needs_compilation
+#> earthtones  0.1.0  0.1.1             FALSE
 library("earthtones")
 ```
-**NOTE: Due to changes in the Google Maps API, it's a bit harder to get the ggmap package (on which earthtones depends) working.  See the [github page for ggmap](https://github.com/dkahle/ggmap) for more information and instructions.**  
 
 Find the color palette of particular parts of the world
 -------------------------------------------------------
@@ -26,8 +29,8 @@ Find the color palette of particular parts of the world
 This package does the following:
 
 1.  Downloads a image of a particular place from google earth/maps. Google uses a variety of sources for these images depending on the place and zoom
-2.  Translates the colors into a perceptually uniform color space--CIE LAB
-3.  Runs a clustering method (currently supporting choice of two different methods)
+2.  Translates the colors into a perceptually uniform color space--[CIE LAB](https://en.wikipedia.org/wiki/Lab_color_space)
+3.  Runs a clustering method (currently supporting choice of two different methods: k-means and PAM)
 4.  Returns a color palette
 
 There is only one function `get_earthtones`. Here is how you use it, in this case for the grand canyon:
@@ -116,7 +119,7 @@ Some notes on clustering methods
 
 There are lots of ways to do the clustering in general and also in this particular case. The default is pam algorithm (for reasons explained below) but there is also k-means, which is a classic clustering method and is a bit simpler and faster.
 
-Here is the k-means result for the bahamas:
+Here is the k-means result for the Bahamas:
 
 ``` r
 get_earthtones(latitude = 24.2, longitude=-77.88,
@@ -139,7 +142,7 @@ The sand-color is perhaps a bit sandier with the PAM approach. This actually mak
 Inspiration
 -----------
 
-There are some other cool things to do with the cool and images in the [RImagePallette package](https://github.com/joelcarlson/RImagePalette). And there is a very cool blog on [the colors of Antarctica](https://havecamerawilltravel.com/colors-antarctica/). And of course if you want a quirky cinematic color scheme, check out [wesanderson](https://github.com/karthik/wesanderson).
+There are some other cool things to do with the cool and images in the [RImagePallette package](https://github.com/joelcarlson/RImagePalette). And there is a very cool blog on [the colors of Antartica](https://havecamerawilltravel.com/colors-antarctica/). And of course if you want a quirky cinematic color scheme, check out [wesanderson](https://github.com/karthik/wesanderson).
 
 Development version
 -------------------

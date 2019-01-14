@@ -26,7 +26,10 @@ rvers <- stringr::str_match(grep("R \\(", description, value = TRUE), "[0-9]{1,4
 ```
 [![minimal R version](https://img.shields.io/badge/R%3E%3D-`r rvers`-6666ff.svg)](https://cran.r-project.org/)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/earthtones)](https://cran.r-project.org/package=earthtones)
-```{r, echo = FALSE}
+```{r, echo = FALSE,message=FALSE,warning=FALSE}
+devtools::install_github("dkahle/ggmap", ref = "tidyup")
+library(ggmap)
+register_google(key = "GOOGLE KEY HERE")
 description <- readLines("DESCRIPTION")
 version <- gsub(" ", "", gsub("Version:", "", grep("Version:", description, value = TRUE)))
 ```
@@ -50,9 +53,9 @@ library("earthtones")
 This package does the following: 
 
 1. Downloads a image of a particular place from google earth/maps.  Google uses a variety of sources for these images depending on the place and zoom 
-2. Translates the colors into a perceptually uniform color space--CIE LAB
-3. Runs a clustering method (currently supporting choice of two different methods) 
-4. Returns a color pallette  
+2. Translates the colors into a perceptually uniform color space--[CIE LAB](https://en.wikipedia.org/wiki/Lab_color_space)
+3. Runs a clustering method (currently supporting choice of two different methods: k-means and PAM) 
+4. Returns a color palette  
 
 There is only one function `get_earthtones`.  Here is how you use it, in this case for the grand canyon:
 
@@ -89,7 +92,7 @@ or Sydney Opera House :
 get_earthtones(latitude = -33.85745, longitude=151.214722, zoom=17, number_of_colors=10)
 ```
 
-If you want to actually use the color scheme for another visualization and not just plot pretty picturs, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
+If you want to actually use the color scheme for another visualization and not just plot pretty pictures, there is a switch in the `get_earthtones` function: just add `include.map=FALSE` to the function call, and the function will only return the color palette for later use:
 
 ```{r bahama_iris,message=FALSE}
 if(!require(ggplot2)) install.packages("ggplot2")
@@ -118,9 +121,9 @@ ggplot(iris.from.gaspe, aes(x=Petal.Length, y=Petal.Width,col=Species))+
 
 ## Some notes on clustering methods
 
-There are lots of ways to do the clustering in genearl and also in this particular case. The default is pam algorithm (for reasons explained below) but there is also k-means, which is a classic clustering method and is a bit simpler and faster.
+There are lots of ways to do the clustering in general and also in this particular case. The default is pam algorithm (for reasons explained below) but there is also k-means, which is a classic clustering method and is a bit simpler and faster.
 
-Here is the k-means result for the bahamas:
+Here is the k-means result for the Bahamas:
 
 ```{r bahamas_kmeans,message=FALSE}
 get_earthtones(latitude = 24.2, longitude=-77.88,
