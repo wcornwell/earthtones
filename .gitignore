@@ -47,3 +47,4 @@ inst/doc
 vignettes/*.R
 .DS_Store
 R/development.R
+google maps key.txt
