@@ -12,8 +12,11 @@
 [![Last-changedate](https://img.shields.io/badge/last%20change-2019--01--14-yellowgreen.svg)](/commits/master)
 
 -------------------------------------------------------
-**PLEASE NOTE** Google recently changed their API which made it much harder to get the R library `ggmap` (on which earthtones depends) to work.  Please see the [ggmap github page for how to get ggmap to work with the new API](https://github.com/dkahle/ggmap), then come back here and install `earthtones`.    
+**PLEASE NOTE:** Google recently changed their API which made it much harder to get the R library `ggmap` (on which earthtones depends) to work.  Please see the [ggmap github page for how to get ggmap to work with the new Google API](https://github.com/dkahle/ggmap), then come back here and install `earthtones`.    
+
+Installing earthtones
 -------------------------------------------------------
+
 
 Here is how to install and load the R package:
 
