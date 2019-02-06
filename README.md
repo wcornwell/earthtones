@@ -9,26 +9,20 @@
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2019--01--14-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2019--02--06-yellowgreen.svg)](/commits/master)
 
--------------------------------------------------------
-**PLEASE NOTE:** Google recently changed their API which made it much harder to get the R library `ggmap` (on which earthtones depends) to work.  Please see the [ggmap github page for how to get ggmap to work with the new Google API](https://github.com/dkahle/ggmap), then come back here and install `earthtones`.    
+**PLEASE NOTE:** Google recently changed their API which made it much harder to get the R library `ggmap` (on which earthtones depends) to work. Please see the [ggmap github page for how to get ggmap to work with the new Google API](https://github.com/dkahle/ggmap), then come back here and install `earthtones`.
 
-Installing earthtones
--------------------------------------------------------
-
-
-Here is how to install and load the R package:
+Here is how to install and load the `earthtones` package from CRAN:
 
 ``` r
 install.packages("earthtones",repos = "https://cloud.r-project.org/")
 #> 
-#>   There is a binary version available but the source version is
-#>   later:
-#>            binary source needs_compilation
-#> earthtones  0.1.0  0.1.1             FALSE
+#> The downloaded binary packages are in
+#>  /var/folders/hn/tsf007g12v3blrjtn9mdjrt00000gn/T//RtmpGeKNJZ/downloaded_packages
 library("earthtones")
 ```
+
 Find the color palette of particular parts of the world
 -------------------------------------------------------
 
@@ -158,4 +152,28 @@ If you'd like to try the most recent development version of `earthtones` run thi
 ``` r
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("wcornwell/earthtones")
+#> 
+#>   
+   checking for file ‘/private/var/folders/hn/tsf007g12v3blrjtn9mdjrt00000gn/T/RtmpGeKNJZ/remotes14016e50c800/wcornwell-earthtones-77959de/DESCRIPTION’ ...
+  
+✔  checking for file ‘/private/var/folders/hn/tsf007g12v3blrjtn9mdjrt00000gn/T/RtmpGeKNJZ/remotes14016e50c800/wcornwell-earthtones-77959de/DESCRIPTION’ (691ms)
+#> 
+  
+─  preparing ‘earthtones’:
+#>    checking DESCRIPTION meta-information ...
+  
+✔  checking DESCRIPTION meta-information
+#> 
+  
+─  checking for LF line-endings in source and make files and shell scripts
+#> 
+  
+─  checking for empty or unneeded directories
+#> 
+  
+─  building ‘earthtones_0.1.1.tar.gz’
+#> 
+  
+   
+#> 
 ```
